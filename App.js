@@ -8,6 +8,9 @@ import React, { Component } from 'react';
 import { DrawerNavigator } from 'react-navigation';
 import ActivitiesScreen from './src/components/ActivitiesScreen/index.js'
 import CalendarScreen from './src/components/CalendarScreen/index.js'
+import { StyleProvider } from 'native-base';
+import getTheme from './native-base-theme/components';
+import platform from './native-base-theme/variables/platform';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' +
@@ -30,7 +33,9 @@ const RootDrawer = DrawerNavigator({
 export default class App extends Component<{}> {
   render() {
     return (
-      <RootDrawer/>
+      <StyleProvider style={getTheme(platform)}>
+        <RootDrawer/>
+      </StyleProvider>
     );
   }
 }
