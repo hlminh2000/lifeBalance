@@ -17,20 +17,7 @@ const CalendarScreen = () => (
       <Right />
     </Header>
     <Content>
-      <Calendar
-        current={'2012-03-01'}
-        minDate={'2012-05-10'}
-        maxDate={'2012-05-30'}
-        onDayPress={(day) => {console.log('selected day', day)}}
-        monthFormat={'yyyy MM'}
-        onMonthChange={(month) => {console.log('month changed', month)}}
-        hideArrows={true}
-        renderArrow={(direction) => (<Arrow />)}
-        hideExtraDays={true}
-        disableMonthChange={true}
-        firstDay={1}
-        hideDayNames={true}
-        showWeekNumbers={true}/>
+      <Calendar/>
     </Content>
   </Container>
 )
