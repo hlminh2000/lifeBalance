@@ -1,20 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon } from 'native-base'
+import HeaderBar from '../HeaderBar/index.js'
 
-const CalendarScreen = () => (
+
+const ActivitiesScreen = () => (
   <Container>
-    <Header>
-      <Left>
-        <Button transparent>
-          <Icon name='menu' />
-        </Button>
-      </Left>
-      <Body>
-        <Title>Header</Title>
-      </Body>
-      <Right />
-    </Header>
+    <HeaderBar
+      title="My Activities"
+    />
     <Content>
       <Text>
         This is Content Section
@@ -30,4 +24,4 @@ const CalendarScreen = () => (
   </Container>
 )
 
-export default CalendarScreen
+export default ActivitiesScreen

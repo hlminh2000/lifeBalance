@@ -11,13 +11,12 @@ import CalendarScreen from './src/components/CalendarScreen/index.js'
 import { StyleProvider } from 'native-base';
 import getTheme from './native-base-theme/components';
 import platform from './native-base-theme/variables/platform';
+import reducers from './src/reducers.js';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-// const instructions = Platform.select({
-//   ios: 'Press Cmd+R to reload,\n' +
-//     'Cmd+D or shake for dev menu',
-//   android: 'Double tap R on your keyboard to reload,\n' +
-//     'Shake or press menu button for dev menu',
-// });
+
+const store = createStore(reducers)
 
 const RootDrawer = DrawerNavigator({
   Calendar: {
@@ -33,9 +32,11 @@ const RootDrawer = DrawerNavigator({
 export default class App extends Component<{}> {
   render() {
     return (
-      <StyleProvider style={getTheme(platform)}>
-        <RootDrawer/>
-      </StyleProvider>
+      <Provider store={store}>
+        <StyleProvider style={getTheme(platform)}>
+          <RootDrawer/>
+        </StyleProvider>
+      </Provider>
     );
   }
 }
