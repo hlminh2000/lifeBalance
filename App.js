@@ -1,40 +1,29 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+
 
 import React, { Component } from 'react';
-import { DrawerNavigator } from 'react-navigation';
-import ActivitiesScreen from './src/components/ActivitiesScreen/index.js'
-import CalendarScreen from './src/components/CalendarScreen/index.js'
 import { StyleProvider } from 'native-base';
 import getTheme from './native-base-theme/components';
 import platform from './native-base-theme/variables/platform';
 import reducers from './src/reducers.js';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import RootDrawer from './src/components/Navigations/Drawer/index.js'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
+console.log("reducers: ", reducers);
 
-const store = createStore(reducers)
+const store = createStore(reducers, composeWithDevTools(
+  // applyMiddleware(...middleware),
+  // other store enhancers if any
+))
 
-const RootDrawer = DrawerNavigator({
-  Calendar: {
-    drawerLabel: "My Calendar",
-    screen: CalendarScreen
-  },
-  ActivitiesScreen: {
-    drawerLabel: "My Activities",
-    screen: ActivitiesScreen
-  },
-});
 
 export default class App extends Component<{}> {
   render() {
     return (
       <Provider store={store}>
         <StyleProvider style={getTheme(platform)}>
-          <RootDrawer/>
+            <RootDrawer />
         </StyleProvider>
       </Provider>
     );

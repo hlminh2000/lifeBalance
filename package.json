@@ -13,9 +13,12 @@
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-calendars": "^1.16.1",
+    "react-native-fab": "^1.0.6",
+    "react-native-modal": "^4.1.1",
     "react-navigation": "^1.0.0-beta.27",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2"
   },
   "devDependencies": {
     "babel-jest": "22.1.0",
