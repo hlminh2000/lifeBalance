@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
           ...state,
           newStagingActivity: newActivity()
         }
-      case action["ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE"].type:
+      case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE"].type:
         return {
           ...state,
           newStagingActivity: {
@@ -40,6 +40,5 @@ export default (state = initialState, action) => {
         }
     }
   })()
-  console.log("output: ", output);
   return output
 }

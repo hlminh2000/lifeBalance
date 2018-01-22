@@ -4,13 +4,14 @@ import {
   Container, Content, Button,
   Left, Right, Body, Icon, List,
   ListItem, Card, CardItem, H1,
-  Input, Item, Label
+  Item, Label, Form
 } from 'native-base'
 import FAB from 'react-native-fab'
 import HeaderBar from '../HeaderBar/index.js'
 import { connect } from 'react-redux'
 import actions from './actions.js'
 import CheckBox from '../reusables/Checkbox.js'
+import Input from '../reusables/Input.js'
 import Modal from "react-native-modal";
 
 const activitiesList = (activities) => (
@@ -37,10 +38,11 @@ const ActivityEditModal = ({
 }) => (
   <Modal isVisible={activity !== null}>
     <Card style={{
-        maxHeight: 500,
+        // maxHeight: 500,
+        flex: 0,
         marginLeft: 20,
         marginRight: 20,
-        paddingTop: 10
+        paddingTop: 10,
       }}>
       <CardItem>
         <Left>
@@ -52,12 +54,17 @@ const ActivityEditModal = ({
       <CardItem>
         <Left>
           <Body>
-            <Item stackedLabel>
-              <Label>Title</Label>
-              <Input onChangeText={(text) => onTitleChange(text)}/>
-            </Item>
+            <Input
+              label={ "Title" }
+              value={ activity ? activity.title : "" }
+              onChangeText={(text) => onTitleChange(text)}
+            />
           </Body>
         </Left>
+        <View>
+          <Text>Cancel</Text>
+          <Text>Done</Text>
+        </View>
       </CardItem>
     </Card>
   </Modal>
@@ -81,7 +88,7 @@ const ActivitiesScreen = ({
         activity={ newStagingActivity }
         onCancel={() => {}}
         onComplete={() => {}}
-        onTitleChange={() => {onNewActivityTitleChange()}}
+        onTitleChange={(newTitle) => {onNewActivityTitleChange(newTitle)}}
       />
     </Container>
   )
@@ -91,12 +98,12 @@ export default connect(
   state => ({
     activities: state.activitiesScreen.activityList,
     editingActivityId: state.activitiesScreen.currentEditingActivityId,
-    newStagingActivity: state.activitiesScreen.newStagingActivity
+    newStagingActivity: state.activitiesScreen.newStagingActivity,
   }),
   dispatch => ({
     onFabTapped: (activity) => dispatch(
-      actions['ACTIVITIES_SCREEN/STAGE_NEW_ACTIVITY'].create())
+      actions['ACTIVITIES_SCREEN/STAGE_NEW_ACTIVITY'].create()),
     onNewActivityTitleChange: (newText) => dispatch(
-      actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE'].create(newText))
+      actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE'].create(newText)),
   })
 )(ActivitiesScreen)

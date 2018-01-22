@@ -26,7 +26,9 @@ export default {
     type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE",
     create: (newText) => ({
       type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE",
-      text: newText,
+      payload: {
+        text: newText,
+      }
     })
   }
 }

@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "dev_android": "react-native run-android --variant=debug",
-    "devMenu_a": "adb shell input keyevent 82"
+    "devMenu_a": "adb shell input keyevent 82",
+    "react-native-vector-icons_setup": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
     "native-base": "^2.3.6",
@@ -15,6 +16,8 @@
     "react-native-calendars": "^1.16.1",
     "react-native-fab": "^1.0.6",
     "react-native-modal": "^4.1.1",
+    "react-native-textinput-effects": "^0.4.2",
+    "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
