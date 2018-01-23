@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native'
+import { Text, View, TouchableHighlight } from 'react-native'
 import {
   Container, Content, Button,
   Left, Right, Body, Icon, List,
@@ -24,10 +24,41 @@ const activitiesList = (activities) => (
         <Text> {activity.title} </Text>
       </Body>
       <Right>
-        <CheckBox checked={activity.isActive}/>
+        <Icon name="pencil" />
       </Right>
     </ListItem>
   ))
+)
+const ActivityItem = activity => (
+  <ListItem icon key={activity.id}>
+    <Left>
+      <Icon name="plane" />
+    </Left>
+    <Body>
+      <Text> {activity.title} </Text>
+    </Body>
+    <Right>
+      <Icon name="pencil" />
+    </Right>
+  </ListItem>
+)
+const ActivityItemList = activities => (
+  <List
+    dataSource={ activities }
+    renderRow={ activity => ActivityItem(activity) }
+    renderLeftHiddenRow={data => (
+      <Button full onPress={() => alert(data)}>
+        <Icon active name="information-circle" />
+      </Button>
+    )}
+    renderRightHiddenRow={(data, secId, rowId, rowMap) =>
+      <Button full danger onPress={() => alert(data)}>
+        <Icon active name="trash" />
+      </Button>
+    }
+    leftOpenValue={75}
+    rightOpenValue={-75}
+  />
 )
 
 const ActivityEditModal = ({
@@ -38,12 +69,12 @@ const ActivityEditModal = ({
 }) => (
   <Modal isVisible={activity !== null}>
     <Card style={{
-        // maxHeight: 500,
-        flex: 0,
-        marginLeft: 20,
-        marginRight: 20,
-        paddingTop: 10,
-      }}>
+      flex: 0,
+      marginLeft: 20,
+      marginRight: 20,
+      paddingTop: 10,
+      paddingBottom: 10,
+    }}>
       <CardItem>
         <Left>
           <Body>
@@ -57,14 +88,25 @@ const ActivityEditModal = ({
             <Input
               label={ "Title" }
               value={ activity ? activity.title : "" }
-              onChangeText={(text) => onTitleChange(text)}
+              onChangeText={ (text) => onTitleChange(text) }
             />
           </Body>
         </Left>
-        <View>
-          <Text>Cancel</Text>
-          <Text>Done</Text>
-        </View>
+      </CardItem>
+      <CardItem>
+        <Left></Left>
+        <Body></Body>
+        <Right>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableHighlight onPress={ onCancel }>
+              <Text>Cancel</Text>
+            </TouchableHighlight>
+            <Text style={{ width: 30 }}> </Text>
+            <TouchableHighlight onPress={ onComplete }>
+              <Text>Done</Text>
+            </TouchableHighlight>
+          </View>
+        </Right>
       </CardItem>
     </Card>
   </Modal>
@@ -75,7 +117,9 @@ const ActivitiesScreen = ({
   editingActivityId,
   newStagingActivity,
   onFabTapped,
-  onNewActivityTitleChange
+  onNewActivityTitleChange,
+  onNewActivityComplete,
+  onNewActivityCancel,
  }) => {
   return (
     <Container>
@@ -86,9 +130,9 @@ const ActivitiesScreen = ({
       <FAB buttonColor="red" onClickAction={ onFabTapped } />
       <ActivityEditModal
         activity={ newStagingActivity }
-        onCancel={() => {}}
-        onComplete={() => {}}
-        onTitleChange={(newTitle) => {onNewActivityTitleChange(newTitle)}}
+        onCancel={ onNewActivityCancel }
+        onComplete={ onNewActivityComplete }
+        onTitleChange={ (newTitle) => {onNewActivityTitleChange(newTitle)} }
       />
     </Container>
   )
@@ -105,5 +149,9 @@ export default connect(
       actions['ACTIVITIES_SCREEN/STAGE_NEW_ACTIVITY'].create()),
     onNewActivityTitleChange: (newText) => dispatch(
       actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE'].create(newText)),
+    onNewActivityComplete: () => dispatch(
+      actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE'].create()),
+    onNewActivityCancel: () => dispatch(
+      actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL'].create()),
   })
 )(ActivitiesScreen)

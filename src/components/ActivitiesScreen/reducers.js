@@ -34,6 +34,20 @@ export default (state = initialState, action) => {
             title: action.payload.text
           }
         }
+      case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE"].type:
+        return {
+          ...state,
+          newStagingActivity: null,
+          activityList: [
+            ...state.activityList,
+            state.newStagingActivity
+          ]
+        }
+      case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL"].type:
+        return {
+          ...state,
+          newStagingActivity: null,
+        }
       default:
         return {
           ...state

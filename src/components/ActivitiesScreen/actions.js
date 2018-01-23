@@ -22,6 +22,20 @@ export default {
       payload: {}
     })
   },
+  "ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE": {
+    type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE",
+    create: () => ({
+      type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE",
+      payload: {}
+    })
+  },
+  "ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL": {
+    type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL",
+    create: () => ({
+      type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL",
+      payload: {}
+    })
+  },
   "ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE": {
     type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE",
     create: (newText) => ({
