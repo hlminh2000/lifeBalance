@@ -7,7 +7,8 @@ export default (props) => (
   <View>
     <Text>{ props.label }</Text>
     <TextInput
-      {...this.props}
+      onTextChange = { props.onChangeText }
+      value = { props.value }
       style={{
         alignSelf: "stretch"
       }}
