@@ -114,10 +114,11 @@ const ActivitiesScreen = ({
   onNewActivityTitleChange,
   onNewActivityComplete,
   onNewActivityCancel,
+  navigation,
  }) => {
   return (
     <Container>
-      <HeaderBar title="My Activities"/>
+      <HeaderBar navigation={navigation} title="My Activities"/>
       <Content>
         <List>{ activitiesList(activities) }</List>
       </Content>

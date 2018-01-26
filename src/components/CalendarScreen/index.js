@@ -5,9 +5,10 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars'
 import HeaderBar from '../HeaderBar/index.js'
 
-const CalendarScreen = ({day}) => (
+const CalendarScreen = ({day, navigation}) => (
   <Container>
     <HeaderBar
+      navigation={navigation}
       title="My Calendar"
     />
     <Content>
