@@ -44,5 +44,14 @@ export default {
         text: newText,
       }
     })
+  },
+  "ACTIVITIES_SCREEN/ACTIVITY_DELETE": {
+    type: "ACTIVITIES_SCREEN/ACTIVITY_DELETE",
+    create: (activityId) => ({
+      type: "ACTIVITIES_SCREEN/ACTIVITY_DELETE",
+      payload: {
+        activityId: activityId,
+      }
+    })
   }
 }

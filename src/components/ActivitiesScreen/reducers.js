@@ -48,6 +48,13 @@ export default (state = initialState, action) => {
           ...state,
           newStagingActivity: null,
         }
+      case actions["ACTIVITIES_SCREEN/ACTIVITY_DELETE"].type:
+        return {
+          ...state,
+          activityList: state.activityList.filter(activity => (
+            activity.id != action.payload.activityId
+          ))
+        }
       default:
         return {
           ...state

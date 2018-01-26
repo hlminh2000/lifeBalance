@@ -75,12 +75,17 @@ const ActivitiesScreen = ({
   onNewActivityComplete,
   onNewActivityCancel,
   navigation,
+  onActivityDelete,
  }) => {
   return (
     <Container>
       <HeaderBar navigation={navigation} title="My Activities"/>
       <Content>
-        <ActivityItemList activities={activities}></ActivityItemList>
+        <ActivityItemList
+          onInfoPressed={ activity => console.log(activity) }
+          onDeletePressed={ activity => onActivityDelete(activity.id) }
+          activities={ activities }
+        />
       </Content>
       <FAB buttonColor="red" onClickAction={ onFabTapped } />
       <ActivityEditModal
@@ -108,5 +113,7 @@ export default connect(
       actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE'].create()),
     onNewActivityCancel: () => dispatch(
       actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL'].create()),
+    onActivityDelete: (activityId) => dispatch(
+      actions['ACTIVITIES_SCREEN/ACTIVITY_DELETE'].create(activityId)),
   })
 )(ActivitiesScreen)
