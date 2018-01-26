@@ -23,9 +23,6 @@ const activitiesList = (activities) => (
       <Body>
         <Text> {activity.title} </Text>
       </Body>
-      <Right>
-        <Icon name="pencil" />
-      </Right>
     </ListItem>
   ))
 )
@@ -37,9 +34,6 @@ const ActivityItem = activity => (
     <Body>
       <Text> {activity.title} </Text>
     </Body>
-    <Right>
-      <Icon name="pencil" />
-    </Right>
   </ListItem>
 )
 const ActivityItemList = activities => (
