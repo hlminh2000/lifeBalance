@@ -40,6 +40,7 @@ const ActivityEditModal = ({
         <Left>
           <Body>
             <Input
+              autoFocus={ true }
               label={ "Title" }
               value={ activity ? activity.title : "" }
               onChangeText={ onTitleChange }

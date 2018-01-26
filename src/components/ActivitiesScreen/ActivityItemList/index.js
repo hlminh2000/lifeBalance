@@ -18,34 +18,20 @@ const ActivityItem = ({ activity }) => (
   </ListItem>
 )
 
-// export default ({ activities, onInfoPressed, onDeletePressed }) => {
-//   const dataSource = new ListView.DataSource({
-//     rowHasChanged: (r1, r2) => r1 !== r2
-//   })
-//   return (
-//     <List
-//       enableEmptySections={true}
-//       dataSource={ dataSource.cloneWithRows(activities) }
-//       renderRow={(activity) => (
-//         <ActivityItem activity={activity}/>
-//       )}
-//       renderLeftHiddenRow={data => (
-//         <Button full onPress={ () => onInfoPressed(data) }>
-//           <Icon active name="information-circle" />
-//         </Button>
-//       )}
-//       renderRightHiddenRow={(data, secId, rowId, rowMap) => (
-//         <Button full danger onPress={ () => onDeletePressed(data) }>
-//           <Icon active name="trash" />
-//         </Button>
-//       )}
-//       leftOpenValue={75}
-//       rightOpenValue={-75}
-//     />
-//   )
-// }
-
 export default class ActivityItemList extends Component {
+  state = {
+    isRenderComplete: true,
+  }
+  forceRerender = () => {
+    this.setState({
+      ...this.state, isRenderComplete: false,
+    })
+    setTimeout(() => {
+      this.setState({
+        ...this.state, isRenderComplete: true,
+      })
+    }, 0);
+  }
   render(){
     const {
       onInfoPressed,
@@ -56,32 +42,37 @@ export default class ActivityItemList extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     })
     return (
-      <List
-        closeOnRowBeginSwipe={true}
-        enableEmptySections={true}
-        dataSource={ dataSource.cloneWithRows(activities) }
-        renderRow={(activity) => (
-          <ActivityItem activity={activity}/>
-        )}
-        renderLeftHiddenRow={data => (
-          <Button full onPress={ () => {
-            onInfoPressed(data)
-            this.setState({})
-          }}>
-            <Icon active name="information-circle" />
-          </Button>
-        )}
-        renderRightHiddenRow={(data, secId, rowId, rowMap) => (
-          <Button full danger onPress={ () => {
-            onDeletePressed(data)
-            this.setState({})
-          }}>
-            <Icon active name="trash" />
-          </Button>
-        )}
-        leftOpenValue={75}
-        rightOpenValue={-75}
-      />
+      this.state.isRenderComplete
+      ? (
+        <List
+          closeOnRowBeginSwipe={true}
+          enableEmptySections={true}
+          dataSource={ dataSource.cloneWithRows(activities) }
+          renderRow={(activity) => (
+            <ActivityItem activity={activity}/>
+          )}
+          renderLeftHiddenRow={data => (
+            <Button full onPress={ (e) => {
+              console.log(e.target);
+              onInfoPressed(data)
+              this.forceRerender()
+            }}>
+              <Icon active name="information-circle" />
+            </Button>
+          )}
+          renderRightHiddenRow={(data, secId, rowId, rowMap) => (
+            <Button full danger onPress={ () => {
+              onDeletePressed(data)
+              this.forceRerender()
+            }}>
+              <Icon active name="trash" />
+            </Button>
+          )}
+          leftOpenValue={75}
+          rightOpenValue={-75}
+        />
+      )
+      : null
     )
   }
 }
