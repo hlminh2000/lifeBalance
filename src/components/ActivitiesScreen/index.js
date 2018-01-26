@@ -88,7 +88,7 @@ const ActivityEditModal = ({
             <Input
               label={ "Title" }
               value={ activity ? activity.title : "" }
-              onChangeText={ (text) => onTitleChange(text) }
+              onChangeText={ onTitleChange }
             />
           </Body>
         </Left>
@@ -132,7 +132,7 @@ const ActivitiesScreen = ({
         activity={ newStagingActivity }
         onCancel={ onNewActivityCancel }
         onComplete={ onNewActivityComplete }
-        onTitleChange={ (newTitle) => {onNewActivityTitleChange(newTitle)} }
+        onTitleChange={ onNewActivityTitleChange }
       />
     </Container>
   )
@@ -147,7 +147,7 @@ export default connect(
   dispatch => ({
     onFabTapped: (activity) => dispatch(
       actions['ACTIVITIES_SCREEN/STAGE_NEW_ACTIVITY'].create()),
-    onNewActivityTitleChange: (newText) => dispatch(
+    onNewActivityTitleChange: (newText) =>  dispatch(
       actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE'].create(newText)),
     onNewActivityComplete: () => dispatch(
       actions['ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE'].create()),
