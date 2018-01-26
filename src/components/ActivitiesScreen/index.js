@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight } from 'react-native'
+import { Text, View, TouchableHighlight, ListView } from 'react-native'
 import {
   Container, Content, Button,
-  Left, Right, Body, Icon, List,
-  ListItem, Card, CardItem, H1,
-  Item, Label, Form
+  Left, Right, Body,
+  Card, CardItem, H1,
+  Label, Form
 } from 'native-base'
 import FAB from 'react-native-fab'
 import HeaderBar from '../HeaderBar/index.js'
@@ -12,48 +12,8 @@ import { connect } from 'react-redux'
 import actions from './actions.js'
 import CheckBox from '../reusables/Checkbox.js'
 import Input from '../reusables/Input.js'
-import Modal from "react-native-modal";
-
-const activitiesList = (activities) => (
-  activities.map(activity => (
-    <ListItem icon key={activity.id}>
-      <Left>
-        <Icon name="plane" />
-      </Left>
-      <Body>
-        <Text> {activity.title} </Text>
-      </Body>
-    </ListItem>
-  ))
-)
-const ActivityItem = activity => (
-  <ListItem icon key={activity.id}>
-    <Left>
-      <Icon name="plane" />
-    </Left>
-    <Body>
-      <Text> {activity.title} </Text>
-    </Body>
-  </ListItem>
-)
-const ActivityItemList = activities => (
-  <List
-    dataSource={ activities }
-    renderRow={ activity => ActivityItem(activity) }
-    renderLeftHiddenRow={data => (
-      <Button full onPress={() => alert(data)}>
-        <Icon active name="information-circle" />
-      </Button>
-    )}
-    renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-      <Button full danger onPress={() => alert(data)}>
-        <Icon active name="trash" />
-      </Button>
-    }
-    leftOpenValue={75}
-    rightOpenValue={-75}
-  />
-)
+import Modal from "react-native-modal"
+import ActivityItemList from './ActivityItemList/index.js'
 
 const ActivityEditModal = ({
   activity,
@@ -120,7 +80,7 @@ const ActivitiesScreen = ({
     <Container>
       <HeaderBar navigation={navigation} title="My Activities"/>
       <Content>
-        <List>{ activitiesList(activities) }</List>
+        <ActivityItemList activities={activities}></ActivityItemList>
       </Content>
       <FAB buttonColor="red" onClickAction={ onFabTapped } />
       <ActivityEditModal
