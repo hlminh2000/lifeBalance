@@ -1,7 +1,5 @@
-
-
 export default {
-  "TEST": {
+  TEST: {
     type: "TEST",
     create: () => ({
       type: "TEST",
@@ -38,20 +36,20 @@ export default {
   },
   "ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE": {
     type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE",
-    create: (newText) => ({
+    create: newText => ({
       type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE",
       payload: {
-        text: newText,
+        text: newText
       }
     })
   },
   "ACTIVITIES_SCREEN/ACTIVITY_DELETE": {
     type: "ACTIVITIES_SCREEN/ACTIVITY_DELETE",
-    create: (activityId) => ({
+    create: activityId => ({
       type: "ACTIVITIES_SCREEN/ACTIVITY_DELETE",
       payload: {
-        activityId: activityId,
+        activityId: activityId
       }
     })
   }
-}
+};
