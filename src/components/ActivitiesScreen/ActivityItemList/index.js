@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, TouchableHighlight, ListView } from "react-native";
+import { View, TouchableHighlight, ListView } from "react-native";
 import {
+  Text,
   Container,
   Content,
   Button,
@@ -62,7 +63,6 @@ export default class ActivityItemList extends Component {
             onPress={e => {
               console.log(e.target);
               onInfoPressed(data);
-              this.forceRerender();
             }}
           >
             <Icon active name="information-circle" />
