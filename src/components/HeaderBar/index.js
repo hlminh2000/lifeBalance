@@ -20,11 +20,10 @@ const HeaderBar = ({ title, navigation }) => (
       <Button
         transparent
         onPress={() => {
-          console.log("clicked!!!");
           navigation.navigate("DrawerOpen");
         }}
       >
-        <Icon name="menu" />
+        <Icon style={{ color: "#ffffff" }} name="menu" />
       </Button>
     </Left>
     <Body>
