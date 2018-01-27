@@ -1,22 +1,22 @@
-import actions from './actions.js'
+import actions from "./actions.js";
 
 const initialState = {
   activityList: [],
   editStagingActivity: null,
   newStagingActivity: null
-}
+};
 
 const newActivity = () => {
-  const now = Date.now()
+  const now = Date.now();
   return {
     icon: "DEFAULT",
     title: "",
     createdAt: now,
     id: `ACTIVITY_${now}_${Math.random()}`,
     isActive: true,
-    isArchived: false,
-  }
-}
+    isArchived: false
+  };
+};
 
 export default (state = initialState, action) => {
   const output = (() => {
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
         return {
           ...state,
           newStagingActivity: newActivity()
-        }
+        };
       case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE"].type:
         return {
           ...state,
@@ -33,33 +33,30 @@ export default (state = initialState, action) => {
             ...state.newStagingActivity,
             title: action.payload.text
           }
-        }
+        };
       case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE"].type:
         return {
           ...state,
           newStagingActivity: null,
-          activityList: [
-            ...state.activityList,
-            state.newStagingActivity
-          ]
-        }
+          activityList: [...state.activityList, state.newStagingActivity]
+        };
       case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL"].type:
         return {
           ...state,
-          newStagingActivity: null,
-        }
+          newStagingActivity: null
+        };
       case actions["ACTIVITIES_SCREEN/ACTIVITY_DELETE"].type:
         return {
           ...state,
-          activityList: state.activityList.filter(activity => (
-            activity.id != action.payload.activityId
-          ))
-        }
+          activityList: state.activityList.filter(
+            activity => activity.id != action.payload.activityId
+          )
+        };
       default:
         return {
           ...state
-        }
+        };
     }
-  })()
-  return output
-}
+  })();
+  return output;
+};
