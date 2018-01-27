@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { CheckBox } from 'native-base'
+import { CheckBox } from "native-base";
 
-export default ({checked}) => (
-  <CheckBox checked={ checked }/>
-)
+export default ({ checked }) => <CheckBox checked={checked} />;

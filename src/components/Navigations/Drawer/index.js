@@ -1,7 +1,6 @@
-
-import ActivitiesScreen from '../../ActivitiesScreen/index.js'
-import CalendarScreen from '../../CalendarScreen/index.js'
-import { DrawerNavigator } from 'react-navigation'
+import ActivitiesScreen from "../../ActivitiesScreen/index.js";
+import CalendarScreen from "../../CalendarScreen/index.js";
+import { DrawerNavigator } from "react-navigation";
 
 const RootDrawer = DrawerNavigator({
   Calendar: {
@@ -11,7 +10,7 @@ const RootDrawer = DrawerNavigator({
   ActivitiesScreen: {
     drawerLabel: "My Activities",
     screen: ActivitiesScreen
-  },
+  }
 });
 
-export default RootDrawer
+export default RootDrawer;
