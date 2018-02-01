@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { StatusBar } from "react-native";
 import { StyleProvider } from "native-base";
 import getTheme from "./native-base-theme/components";
 import platform from "./native-base-theme/variables/platform";
@@ -7,6 +8,7 @@ import { Provider, connect } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import RootDrawer from "./src/components/Navigations/Drawer/index.js";
 import { composeWithDevTools } from "redux-devtools-extension";
+import STYLE from "./src/styleVariable";
 
 const store = createStore(
   reducers,
@@ -20,7 +22,13 @@ export default class App extends Component<{}> {
     return (
       <Provider store={store}>
         <StyleProvider style={getTheme(platform)}>
-          <RootDrawer />
+          <React.Fragment>
+            <StatusBar
+              backgroundColor={STYLE.COLOR_PRIMARY_DARK}
+              barStyle="light-content"
+            />
+            <RootDrawer />
+          </React.Fragment>
         </StyleProvider>
       </Provider>
     );

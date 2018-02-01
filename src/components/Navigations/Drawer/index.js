@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StatusBar } from "react-native";
+import { Dimensions } from "react-native";
 import { StyleSheet, View, TouchableHighlight } from "react-native";
 import { DrawerNavigator } from "react-navigation";
 import { Text } from "native-base";
@@ -33,10 +33,6 @@ const RootDrawer = DrawerNavigator(
     drawerWidth: width * 0.85,
     contentComponent: ({ navigation }) => (
       <View>
-        <StatusBar
-          backgroundColor={STYLE.COLOR_PRIMARY_DARK}
-          barStyle="light-content"
-        />
         <LinearGradient
           colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
           style={{ height: 200 }}
