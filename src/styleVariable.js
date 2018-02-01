@@ -1,4 +1,5 @@
 export default {
   COLOR_PRIMARY: "#35D5A7",
+  COLOR_PRIMARY_DARK: "#1A473A",
   COLOR_SECONDARY: "#36D5C7"
 };
