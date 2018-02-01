@@ -21,6 +21,7 @@ import CheckBox from "../reusables/Checkbox.js";
 import Input from "../reusables/Input.js";
 import Modal from "react-native-modal";
 import ActivityItemList from "./ActivityItemList/index.js";
+import STYLE from "../../styleVariable";
 
 const ActivityEditModal = ({
   activity,
@@ -96,7 +97,7 @@ const ActivitiesScreen = ({
         activities={activities}
       />
     </Content>
-    <FAB buttonColor="red" onClickAction={onFabTapped} />
+    <FAB buttonColor={STYLE.COLOR_PRIMARY} onClickAction={onFabTapped} />
     <ActivityEditModal
       activity={newStagingActivity}
       onCancel={onNewActivityCancel}
