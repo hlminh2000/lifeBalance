@@ -5,6 +5,8 @@ import { DrawerNavigator } from "react-navigation";
 import { Text } from "native-base";
 import ActivitiesScreen from "../../ActivitiesScreen/index.js";
 import CalendarScreen from "../../CalendarScreen/index.js";
+import LinearGradient from "react-native-linear-gradient";
+import STYLE from "../../../styleVariable";
 
 const { height, width } = Dimensions.get("window");
 
@@ -21,11 +23,9 @@ class SideDrawer extends React.Component {
     const { navigation } = this.props;
     return (
       <View>
-        <View
-          style={{
-            height: 200,
-            backgroundColor: "green"
-          }}
+        <LinearGradient
+          colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
+          style={{ height: 200 }}
         />
         {[
           {

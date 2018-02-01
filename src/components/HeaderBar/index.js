@@ -13,9 +13,10 @@ import {
   Body,
   Icon
 } from "native-base";
+import STYLE from "../../styleVariable.js";
 
 const HeaderBar = ({ title, navigation }) => (
-  <Header>
+  <Header style={{ backgroundColor: STYLE.COLOR_PRIMARY }}>
     <Left>
       <Button
         transparent

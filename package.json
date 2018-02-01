@@ -15,6 +15,7 @@
     "react-native": "0.52.0",
     "react-native-calendars": "^1.16.1",
     "react-native-fab": "^1.0.6",
+    "react-native-linear-gradient": "^2.4.0",
     "react-native-material-design": "^0.3.7",
     "react-native-modal": "^4.1.1",
     "react-native-textinput-effects": "^0.4.2",
