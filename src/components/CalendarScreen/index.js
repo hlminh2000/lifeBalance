@@ -23,12 +23,17 @@ import HeaderBar from "../HeaderBar/index.js";
 const CalendarScreen = ({ day, navigation, availableActivities }) => (
   <Container>
     <HeaderBar navigation={navigation} title="My Calendar" />
-    <Calendar />
+    <Calendar style={{ elevation: 2 }} />
     <Content>
       <List>
         {availableActivities.map(activity => (
-          <ListItem key={activity.id}>
-            <Text>{activity.title}</Text>
+          <ListItem icon key={activity.id}>
+            <Left>
+              <Icon name="plane" />
+            </Left>
+            <Body>
+              <Text> {activity.title} </Text>
+            </Body>
           </ListItem>
         ))}
       </List>
