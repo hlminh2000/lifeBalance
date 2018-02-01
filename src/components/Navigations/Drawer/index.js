@@ -18,10 +18,20 @@ const NavigationItem = ({ title, navigationTarget, icon, navigation }) => (
   </View>
 );
 
-class SideDrawer extends React.Component {
-  render() {
-    const { navigation } = this.props;
-    return (
+const RootDrawer = DrawerNavigator(
+  {
+    CalendarScreen: {
+      drawerLabel: "My Calendar",
+      screen: CalendarScreen
+    },
+    ActivitiesScreen: {
+      drawerLabel: "My Activities",
+      screen: ActivitiesScreen
+    }
+  },
+  {
+    drawerWidth: width * 0.85,
+    contentComponent: ({ navigation }) => (
       <View>
         <LinearGradient
           colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
@@ -42,24 +52,7 @@ class SideDrawer extends React.Component {
           <NavigationItem key={i} {...menuItem} navigation={navigation} />
         ))}
       </View>
-    );
-  }
-}
-
-const RootDrawer = DrawerNavigator(
-  {
-    CalendarScreen: {
-      drawerLabel: "My Calendar",
-      screen: CalendarScreen
-    },
-    ActivitiesScreen: {
-      drawerLabel: "My Activities",
-      screen: ActivitiesScreen
-    }
-  },
-  {
-    drawerWidth: width * 0.85,
-    contentComponent: props => <SideDrawer navigation={props.navigation} />
+    )
   }
 );
 
