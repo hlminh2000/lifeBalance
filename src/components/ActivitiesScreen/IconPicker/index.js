@@ -6,6 +6,13 @@ const AVAILABLE_ICONS = ["book", "heart", "dumbel", "people", "poop"];
 
 export default ({ iconName }) => (
   <View>
-    {AVAILABLE_ICONS.map(iconName => icons[iconName]({ key: iconName }))}
+    {AVAILABLE_ICONS.map(iconName =>
+      icons[iconName]({
+        key: iconName,
+        style: {
+          fontSize: 20
+        }
+      })
+    )}
   </View>
 );
