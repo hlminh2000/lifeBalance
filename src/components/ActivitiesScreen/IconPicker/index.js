@@ -7,7 +7,8 @@ const AVAILABLE_ICONS = [
   "heart",
   "poop",
   "weight_lifter",
-  "heavy_dollar_sign"
+  "heavy_dollar_sign",
+  "fr"
 ];
 
 export default ({ iconName }) => (
