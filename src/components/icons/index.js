@@ -6,7 +6,11 @@ const emoji = nodeEmoji.get("coffee");
 export default {
   book: props => <Text {...props}>{nodeEmoji.get("book")}</Text>,
   heart: props => <Text {...props}>{nodeEmoji.get("heart")}</Text>,
-  dumbel: props => <Text {...props}>{nodeEmoji.get("dumbel")}</Text>,
-  people: props => <Text {...props}>{nodeEmoji.get("people")}</Text>,
-  poop: props => <Text {...props}>{nodeEmoji.get("poop")}</Text>
+  poop: props => <Text {...props}>{nodeEmoji.get("poop")}</Text>,
+  heavy_dollar_sign: props => (
+    <Text {...props}>{nodeEmoji.get("heavy_dollar_sign")}</Text>
+  ),
+  weight_lifter: props => (
+    <Text {...props}>{nodeEmoji.get("weight_lifter")}</Text>
+  )
 };
