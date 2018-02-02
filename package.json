@@ -7,10 +7,12 @@
     "test": "jest",
     "dev_android": "react-native run-android --variant=debug",
     "devMenu_a": "adb shell input keyevent 82",
-    "react-native-vector-icons_setup": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
+    "react-native-vector-icons_setup":
+      "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
     "native-base": "^2.3.6",
+    "node-emoji": "^1.8.1",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-calendars": "^1.16.1",

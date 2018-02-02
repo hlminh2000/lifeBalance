@@ -22,6 +22,7 @@ import Input from "../reusables/Input.js";
 import Modal from "react-native-modal";
 import ActivityItemList from "./ActivityItemList/index.js";
 import STYLE from "../../styleVariable";
+import IconPicker from "./IconPicker";
 
 const ActivityEditModal = ({
   activity,
@@ -57,6 +58,9 @@ const ActivityEditModal = ({
             />
           </Body>
         </Left>
+      </CardItem>
+      <CardItem>
+        <IconPicker />
       </CardItem>
       <CardItem>
         <Left />
