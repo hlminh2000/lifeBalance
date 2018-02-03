@@ -10,7 +10,14 @@ const AVAILABLE_ICONS = [
   "poop",
   "weight_lifter",
   "heavy_dollar_sign",
-  "fr"
+  "fr",
+  "cn",
+  "lower_left_paintbrush",
+  "dancer",
+  "violin",
+  "mortar_board",
+  "nerd_face",
+  "studio_microphone"
 ];
 
 const IconPicker = ({ selectedIcon, onSelect }) => (
