@@ -63,7 +63,9 @@ export default class ActivityItemList extends Component {
         closeOnRowBeginSwipe={true}
         enableEmptySections={true}
         dataSource={dataSource.cloneWithRows(activities)}
-        renderRow={activity => <ActivityItem activity={activity} />}
+        renderRow={activity => (
+          <ActivityItem key={activity.id} activity={activity} />
+        )}
         renderLeftHiddenRow={data => (
           <Button
             full
