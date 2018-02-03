@@ -16,7 +16,8 @@ import STYLE from "./src/styleVariable";
 
 const persistConfig = {
   key: "root",
-  storage: storage
+  storage: storage,
+  whitelist: ["activitiesScreen", "calendarScreen"]
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
