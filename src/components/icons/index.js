@@ -4,6 +4,7 @@ import nodeEmoji from "node-emoji";
 const emoji = nodeEmoji.get("coffee");
 
 export default {
+  DEFAULT: props => null,
   book: props => <Text {...props}>{nodeEmoji.get("book")}</Text>,
   heart: props => <Text {...props}>{nodeEmoji.get("heart")}</Text>,
   poop: props => <Text {...props}>{nodeEmoji.get("poop")}</Text>,
