@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, View, TouchableHighlight, ListView } from "react-native";
 import icons from "../../icons";
 import { chunk } from "lodash";
+import STYLE from "../../../styleVariable";
 
 const AVAILABLE_ICONS = [
   "book",
@@ -25,17 +26,32 @@ const IconPicker = ({ selectedIcon, onSelect }) => (
         }}
       >
         {row.map((iconName, i) => (
-          <TouchableHighlight key={i} onPress={() => onSelect(iconName)}>
-            {icons[iconName]({
-              key: iconName,
-              style: {
-                fontSize: 20
-              }
-            })}
-          </TouchableHighlight>
+          <View key={i}>
+            <TouchableHighlight onPress={() => onSelect(iconName)}>
+              {icons[iconName]({
+                key: iconName,
+                style: {
+                  fontSize: 20
+                }
+              })}
+            </TouchableHighlight>
+            <View
+              style={{
+                position: "absolute",
+                width: 7,
+                height: 7,
+                top: 30,
+                left: 10,
+                backgroundColor:
+                  selectedIcon === iconName ? STYLE.COLOR_PRIMARY : null,
+                borderRadius: 100
+              }}
+            />
+          </View>
         ))}
       </View>
     ))}
   </View>
 );
+
 export default IconPicker;

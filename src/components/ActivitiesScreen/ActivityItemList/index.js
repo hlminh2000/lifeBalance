@@ -18,11 +18,18 @@ import {
   Label,
   Form
 } from "native-base";
+import icons from "../../icons";
 
 const ActivityItem = ({ activity }) => (
   <ListItem icon key={activity.id}>
     <Left>
-      <Icon name="plane" />
+      {icons[activity.icon]({
+        key: activity.icon,
+        style: {
+          marginLeft: 10,
+          fontSize: 20
+        }
+      })}
     </Left>
     <Body>
       <Text> {activity.title} </Text>
