@@ -51,5 +51,14 @@ export default {
         activityId: activityId
       }
     })
+  },
+  "ACTIVITIES_SCREEN/NEW_ACTIVITY_ICON_SELECT": {
+    type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_ICON_SELECT",
+    create: iconName => ({
+      type: "ACTIVITIES_SCREEN/NEW_ACTIVITY_ICON_SELECT",
+      payload: {
+        iconName: iconName
+      }
+    })
   }
 };

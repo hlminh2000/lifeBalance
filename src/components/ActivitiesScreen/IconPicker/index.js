@@ -25,7 +25,7 @@ const IconPicker = ({ selectedIcon, onSelect }) => (
         }}
       >
         {row.map((iconName, i) => (
-          <TouchableHighlight key={i} onPress={onSelect}>
+          <TouchableHighlight key={i} onPress={() => onSelect(iconName)}>
             {icons[iconName]({
               key: iconName,
               style: {

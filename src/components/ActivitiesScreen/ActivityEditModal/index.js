@@ -17,7 +17,13 @@ import Input from "../../reusables/Input.js";
 import Modal from "react-native-modal";
 import IconPicker from "../IconPicker";
 
-export default ({ activity, onCancel, onComplete, onTitleChange }) => (
+export default ({
+  activity,
+  onCancel,
+  onComplete,
+  onTitleChange,
+  onIconSelect
+}) => (
   <Modal isVisible={activity !== null}>
     <Card
       style={{
@@ -48,7 +54,10 @@ export default ({ activity, onCancel, onComplete, onTitleChange }) => (
         </Left>
       </CardItem>
       <CardItem>
-        <IconPicker />
+        <IconPicker
+          selectedIcon={activity ? activity.icon : ""}
+          onSelect={onIconSelect}
+        />
       </CardItem>
       <CardItem>
         <Left />

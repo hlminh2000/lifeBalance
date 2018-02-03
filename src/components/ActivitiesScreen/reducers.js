@@ -34,6 +34,15 @@ export default (state = initialState, action) => {
             title: action.payload.text
           }
         };
+      case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_ICON_SELECT"].type:
+        console.log("iconName: ", action.payload.iconName);
+        return {
+          ...state,
+          newStagingActivity: {
+            ...state.newStagingActivity,
+            icon: action.payload.iconName
+          }
+        };
       case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE"].type:
         return {
           ...state,

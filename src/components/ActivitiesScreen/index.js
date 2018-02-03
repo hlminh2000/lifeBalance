@@ -22,7 +22,6 @@ import Input from "../reusables/Input.js";
 import Modal from "react-native-modal";
 import ActivityItemList from "./ActivityItemList/index.js";
 import STYLE from "../../styleVariable";
-import IconPicker from "./IconPicker";
 import ActivityEditModal from "./ActivityEditModal";
 
 const ActivitiesScreen = ({
@@ -31,6 +30,7 @@ const ActivitiesScreen = ({
   newStagingActivity,
   onFabTapped,
   onNewActivityTitleChange,
+  onNewActivityIconSelect,
   onNewActivityComplete,
   onNewActivityCancel,
   navigation,
@@ -51,6 +51,7 @@ const ActivitiesScreen = ({
       onCancel={onNewActivityCancel}
       onComplete={onNewActivityComplete}
       onTitleChange={onNewActivityTitleChange}
+      onIconSelect={onNewActivityIconSelect}
     />
   </Container>
 );
@@ -73,6 +74,10 @@ export default connect(
     onNewActivityCancel: () =>
       dispatch(actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL"].create()),
     onActivityDelete: activityId =>
-      dispatch(actions["ACTIVITIES_SCREEN/ACTIVITY_DELETE"].create(activityId))
+      dispatch(actions["ACTIVITIES_SCREEN/ACTIVITY_DELETE"].create(activityId)),
+    onNewActivityIconSelect: iconName =>
+      dispatch(
+        actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_ICON_SELECT"].create(iconName)
+      )
   })
 )(ActivitiesScreen);
