@@ -19,6 +19,7 @@ import {
 } from "native-base";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import HeaderBar from "../HeaderBar/index.js";
+import icons from "../icons";
 
 const CalendarScreen = ({ day, navigation, availableActivities }) => (
   <Container>
@@ -29,7 +30,12 @@ const CalendarScreen = ({ day, navigation, availableActivities }) => (
         {availableActivities.map(activity => (
           <ListItem icon key={activity.id}>
             <Left>
-              <Icon name="plane" />
+              {icons[activity.icon]({
+                key: activity.icon,
+                style: {
+                  fontSize: 20
+                }
+              })}
             </Left>
             <Body>
               <Text> {activity.title} </Text>
