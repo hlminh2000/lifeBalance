@@ -2,7 +2,7 @@ import React from "react";
 import { Dimensions } from "react-native";
 import { StyleSheet, View, TouchableHighlight } from "react-native";
 import { DrawerNavigator } from "react-navigation";
-import { Text } from "native-base";
+import { Text, List, ListItem } from "native-base";
 import ActivitiesScreen from "../../ActivitiesScreen/index.js";
 import CalendarScreen from "../../CalendarScreen/index.js";
 import LinearGradient from "react-native-linear-gradient";
@@ -37,20 +37,24 @@ const RootDrawer = DrawerNavigator(
           colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
           style={{ height: 200 }}
         />
-        {[
-          {
-            title: "My Calendar",
-            navigationTarget: "CalendarScreen",
-            icon: ""
-          },
-          {
-            title: "My Activities",
-            navigationTarget: "ActivitiesScreen",
-            icon: ""
-          }
-        ].map((menuItem, i) => (
-          <NavigationItem key={i} {...menuItem} navigation={navigation} />
-        ))}
+        <List>
+          {[
+            {
+              title: "My Calendar",
+              navigationTarget: "CalendarScreen",
+              icon: ""
+            },
+            {
+              title: "My Activities",
+              navigationTarget: "ActivitiesScreen",
+              icon: ""
+            }
+          ].map((menuItem, i) => (
+            <ListItem key={i}>
+              <NavigationItem key={i} {...menuItem} navigation={navigation} />
+            </ListItem>
+          ))}
+        </List>
       </View>
     )
   }
