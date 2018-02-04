@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableHighlight, ListView } from "react-native";
+import { Text, View, ListView } from "react-native";
 import icons from "../../icons";
 import { chunk } from "lodash";
 import STYLE from "../../../styleVariable";
@@ -34,14 +34,14 @@ const IconPicker = ({ selectedIcon, onSelect }) => (
       >
         {row.map((iconName, i) => (
           <View key={i}>
-            <TouchableHighlight onPress={() => onSelect(iconName)}>
+            <Text onPress={() => onSelect(iconName)}>
               {icons[iconName]({
                 key: iconName,
                 style: {
                   fontSize: 20
                 }
               })}
-            </TouchableHighlight>
+            </Text>
             <View
               style={{
                 position: "absolute",
