@@ -12,7 +12,7 @@ const { height, width } = Dimensions.get("window");
 
 const NavigationItem = ({ title, navigationTarget, icon, navigation }) => (
   <View>
-    <TouchableHighlight>
+    <TouchableHighlight onPress={() => navigation.navigate(navigationTarget)}>
       <Text>{title}</Text>
     </TouchableHighlight>
   </View>
@@ -50,11 +50,7 @@ const RootDrawer = DrawerNavigator(
               icon: ""
             }
           ].map((menuItem, i) => (
-            <ListItem
-              style={{ borderBottomWidth: 0 }}
-              onPress={() => navigation.navigate(menuItem.navigationTarget)}
-              key={i}
-            >
+            <ListItem style={{ borderBottomWidth: 0 }} key={i}>
               <NavigationItem key={i} {...menuItem} navigation={navigation} />
             </ListItem>
           ))}

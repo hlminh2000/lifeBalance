@@ -36,21 +36,17 @@ export default class App extends Component<{}> {
   render() {
     return (
       <Provider store={store}>
-        {
-          //<PersistGate loading={null} persistor={persistor}>
-        }
-        <StyleProvider style={getTheme(platform)}>
-          <React.Fragment>
-            <StatusBar
-              backgroundColor={STYLE.COLOR_PRIMARY_DARK}
-              barStyle="light-content"
-            />
-            <RootDrawer />
-          </React.Fragment>
-        </StyleProvider>
-        {
-          //</PersistGate>
-        }
+        <PersistGate loading={null} persistor={persistor}>
+          <StyleProvider style={getTheme(platform)}>
+            <React.Fragment>
+              <StatusBar
+                backgroundColor={STYLE.COLOR_PRIMARY_DARK}
+                barStyle="light-content"
+              />
+              <RootDrawer />
+            </React.Fragment>
+          </StyleProvider>
+        </PersistGate>
       </Provider>
     );
   }
