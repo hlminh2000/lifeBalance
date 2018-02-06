@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, CheckBox } from "react-native";
 import {
   Container,
   Header,
@@ -24,7 +24,12 @@ import icons from "../icons";
 const CalendarScreen = ({ day, navigation, availableActivities }) => (
   <Container>
     <HeaderBar navigation={navigation} title="My Calendar" />
-    <Calendar style={{ elevation: 2 }} />
+    <Calendar
+      style={{ elevation: 2 }}
+      onDayPress={day => {
+        console.log("selected day", day);
+      }}
+    />
     <Content>
       <List>
         {availableActivities.map(activity => (
@@ -40,6 +45,9 @@ const CalendarScreen = ({ day, navigation, availableActivities }) => (
             <Body>
               <Text> {activity.title} </Text>
             </Body>
+            <Right>
+              <CheckBox />
+            </Right>
           </ListItem>
         ))}
       </List>

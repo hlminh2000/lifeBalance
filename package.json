@@ -10,6 +10,7 @@
     "react-native-vector-icons_setup": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
+    "moment": "^2.20.1",
     "native-base": "^2.3.6",
     "node-emoji": "^1.8.1",
     "pixi.js": "^4.7.0",
