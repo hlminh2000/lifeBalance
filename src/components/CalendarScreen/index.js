@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, CheckBox } from "react-native";
+import actions from "./actions";
 import {
   Container,
   Header,
@@ -21,7 +22,12 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import HeaderBar from "../HeaderBar/index.js";
 import icons from "../icons";
 
-const CalendarScreen = ({ day, navigation, availableActivities }) => (
+const CalendarScreen = ({
+  day,
+  navigation,
+  availableActivities,
+  onActivityCheck
+}) => (
   <Container>
     <HeaderBar navigation={navigation} title="My Calendar" />
     <Calendar
@@ -32,7 +38,7 @@ const CalendarScreen = ({ day, navigation, availableActivities }) => (
     />
     <Content>
       <List>
-        {availableActivities.map(activity => (
+        {availableActivities.map(({ id, icon, title }) => (
           <ListItem icon key={activity.id}>
             <Left>
               {icons[activity.icon]({
@@ -46,7 +52,7 @@ const CalendarScreen = ({ day, navigation, availableActivities }) => (
               <Text> {activity.title} </Text>
             </Body>
             <Right>
-              <CheckBox />
+              <CheckBox onValueChange={e => onActivityCheck(id)} />
             </Right>
           </ListItem>
         ))}
@@ -59,5 +65,9 @@ export default connect(
   state => ({
     availableActivities: state.activitiesScreen.activityList
   }),
-  dispatch => ({})
+  dispatch => ({
+    onActivityCheck: activityId => {
+      dispatch(actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].create(activityId));
+    }
+  })
 )(CalendarScreen);

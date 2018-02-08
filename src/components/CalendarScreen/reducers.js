@@ -1,4 +1,6 @@
 import DateUtil from "../../utils/DateUtils";
+import actions from "./actions";
+import moment from "moment";
 
 const initialState = {
   currentDate: DateUtil.getCurrentDateString(),
@@ -15,10 +17,13 @@ const newActivityLog = activityId => ({
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "CALENDAR_SCREEN/NEW_ACTIVITY_LOG":
+    case actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].type:
       return {
         ...state,
-        activitiesLog: []
+        activitiesLog: [
+          ...state.activitiesLog,
+          newActivityLog(action.payload.activityId)
+        ]
       };
     default:
       return state;
