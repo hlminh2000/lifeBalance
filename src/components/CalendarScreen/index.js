@@ -39,17 +39,17 @@ const CalendarScreen = ({
     <Content>
       <List>
         {availableActivities.map(({ id, icon, title }) => (
-          <ListItem icon key={activity.id}>
+          <ListItem icon key={id}>
             <Left>
-              {icons[activity.icon]({
-                key: activity.icon,
+              {icons[icon]({
+                key: icon,
                 style: {
                   fontSize: 20
                 }
               })}
             </Left>
             <Body>
-              <Text> {activity.title} </Text>
+              <Text> {title} </Text>
             </Body>
             <Right>
               <CheckBox onValueChange={e => onActivityCheck(id)} />
