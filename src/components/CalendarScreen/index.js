@@ -35,7 +35,7 @@ const CalendarScreen = ({
     <HeaderBar navigation={navigation} title="My Calendar" />
     <Calendar
       markedDates={{
-        [currentDayString]: { selected: true }
+        [currentDayString]: { selected: true, selectedColor: "blue" }
       }}
       style={{ elevation: 2 }}
       onDayPress={day => {
