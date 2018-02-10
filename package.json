@@ -7,9 +7,15 @@
     "test": "jest",
     "dev_android": "react-native run-android --variant=debug",
     "devMenu_a": "adb shell input keyevent 82",
-    "react-native-vector-icons_setup": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
+    "react-native-vector-icons_setup":
+      "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json",
+    "deploy_prop": "code-push release-react lifeBalance Android -d Production",
+    "deploy_stage": "code-push release-react lifeBalance Android -d Staging"
   },
   "dependencies": {
+    "appcenter": "^1.2.0",
+    "appcenter-analytics": "^1.2.0",
+    "appcenter-crashes": "^1.2.0",
     "moment": "^2.20.1",
     "native-base": "^2.3.6",
     "node-emoji": "^1.8.1",

@@ -137,6 +137,9 @@ android {
 }
 
 dependencies {
+    compile project(':appcenter-crashes')
+    compile project(':appcenter-analytics')
+    compile project(':appcenter')
     compile project(':react-native-push-notification')
     compile project(':react-native-android-checkbox')
     compile project(':react-native-linear-gradient')
