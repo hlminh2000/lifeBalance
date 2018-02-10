@@ -3,7 +3,7 @@ import actions from "./actions";
 import moment from "moment";
 
 const initialState = {
-  currentDate: DateUtil.getCurrentDateString(),
+  selectedDateString: DateUtil.currentCalendarString(),
   activitiesLog: []
 };
 
@@ -24,6 +24,11 @@ export default (state = initialState, action) => {
           ...state.activitiesLog,
           newActivityLog(action.payload.activityId)
         ]
+      };
+    case actions["CALENDAR_SCREEN/DATE_SELECT"].type:
+      return {
+        ...state,
+        selectedDateString: action.payload.dateString
       };
     default:
       return state;

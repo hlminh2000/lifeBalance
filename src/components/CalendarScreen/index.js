@@ -29,17 +29,19 @@ const CalendarScreen = ({
   navigation,
   availableActivities,
   onActivityCheck,
-  currentDayString = DateUtils.getCurrentDateString()
+  selectedDateString = DateUtils.currentCalendarString(),
+  onDaySelect
 }) => (
   <Container>
     <HeaderBar navigation={navigation} title="My Calendar" />
     <Calendar
       markedDates={{
-        [currentDayString]: { selected: true, selectedColor: "blue" }
+        [selectedDateString]: { selected: true, selectedColor: "blue" }
       }}
       style={{ elevation: 2 }}
       onDayPress={day => {
         console.log("selected day", day);
+        onDaySelect(day.dateString);
       }}
     />
     <Content>
@@ -69,11 +71,14 @@ const CalendarScreen = ({
 
 export default connect(
   state => ({
-    availableActivities: state.activitiesScreen.activityList
+    availableActivities: state.activitiesScreen.activityList,
+    selectedDateString: state.calendarScreen.selectedDateString
   }),
   dispatch => ({
     onActivityCheck: activityId => {
       dispatch(actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].create(activityId));
-    }
+    },
+    onDaySelect: dateString =>
+      dispatch(actions["CALENDAR_SCREEN/DATE_SELECT"].create(dateString))
   })
 )(CalendarScreen);
