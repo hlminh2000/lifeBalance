@@ -21,10 +21,13 @@ export default (state = initialState, action) => {
     case actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].type:
       return {
         ...state,
-        activitiesLog: [
+        activitiesLog: {
           ...state.activitiesLog,
-          newActivityLog(action.payload.activityId)
-        ]
+          [action.payload.selectedDateString]: [
+            ...(state.activitiesLog[action.payload.selectedDateString] || []),
+            newActivityLog(action.payload.activityId)
+          ]
+        }
       };
     case actions["CALENDAR_SCREEN/DATE_SELECT"].type:
       return {
@@ -34,15 +37,20 @@ export default (state = initialState, action) => {
     case actions["CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG"].type:
       return {
         ...state,
-        activitiesLog: state.activitiesLog.filter(
-          log =>
-            !(
-              log.activityId === action.payload.activityId &&
-              DateUtils.toCalendarString(
-                DateUtils.getDateString(log.timestamp)
-              ) === state.selectedDateString
-            )
-        )
+        activitiesLog: {
+          ...state.activitiesLog,
+          [action.payload.selectedDateString]: state.activitiesLog[
+            action.payload.selectedDateString
+          ].filter(
+            log =>
+              !(
+                log.activityId === action.payload.activityId &&
+                DateUtils.toCalendarString(
+                  DateUtils.getDateString(log.timestamp)
+                ) === state.selectedDateString
+              )
+          )
+        }
       };
     default:
       return state;

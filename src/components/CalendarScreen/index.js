@@ -73,7 +73,7 @@ const CalendarScreen = ({
                   )
                 }
                 value={
-                  activitiesLog.filter(
+                  (activitiesLog[selectedDateString] || []).filter(
                     log =>
                       log.activityId === id &&
                       DateUtils.toCalendarString(
@@ -81,7 +81,7 @@ const CalendarScreen = ({
                       ) === selectedDateString
                   ).length > 0
                 }
-                onValueChange={e => onActivityCheck(id, e)}
+                onValueChange={e => onActivityCheck(id, e, selectedDateString)}
               />
             </Right>
           </ListItem>
@@ -98,15 +98,20 @@ export default connect(
     activitiesLog: state.calendarScreen.activitiesLog
   }),
   dispatch => ({
-    onActivityCheck: (activityId, isChecked) => {
-      console.log("sdfgsdffdgh");
+    onActivityCheck: (activityId, isChecked, selectedDateString) => {
       if (isChecked) {
         dispatch(
-          actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].create(activityId)
+          actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].create(
+            activityId,
+            selectedDateString
+          )
         );
       } else {
         dispatch(
-          actions["CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG"].create(activityId)
+          actions["CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG"].create(
+            activityId,
+            selectedDateString
+          )
         );
       }
     },

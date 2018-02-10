@@ -1,11 +1,4 @@
 export default {
-  "CALENDAR_SCREEN/NEW_ACTIVITY_LOG": {
-    type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
-    create: activityId => ({
-      type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
-      payload: { activityId }
-    })
-  },
   "CALENDAR_SCREEN/DATE_SELECT": {
     type: "CALENDAR_SCREEN/DATE_SELECT",
     create: dateString => ({
@@ -13,11 +6,18 @@ export default {
       payload: { dateString }
     })
   },
+  "CALENDAR_SCREEN/NEW_ACTIVITY_LOG": {
+    type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
+    create: (activityId, selectedDateString) => ({
+      type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
+      payload: { activityId, selectedDateString }
+    })
+  },
   "CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG": {
     type: "CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG",
-    create: activityId => ({
+    create: (activityId, selectedDateString) => ({
       type: "CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG",
-      payload: { activityId }
+      payload: { activityId, selectedDateString }
     })
   }
 };
