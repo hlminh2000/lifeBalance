@@ -1,18 +1,19 @@
 import DateUtil from "../../utils/DateUtils";
 import actions from "./actions";
 import moment from "moment";
+import DateUtils from "../../utils/DateUtils";
 
 const initialState = {
-  selectedDateString: DateUtil.currentCalendarString(),
+  selectedDateString: DateUtils.toCalendarString(DateUtils.getDateString()),
   activitiesLog: []
 };
 
 const newActivityLog = activityId => ({
   id: `${activityId}_${DateUtil.now()}`,
   activityId: activityId,
-  timestamp: DateUtil.getCurrentDateString(),
-  start: new moment().subtract(1, "h").format(),
-  end: DateUtil.getCurrentDateString()
+  timestamp: Date.now(),
+  start: new moment().subtract(1, "h").unix(),
+  end: new moment().unix()
 });
 
 export default (state = initialState, action) => {
@@ -29,6 +30,19 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedDateString: action.payload.dateString
+      };
+    case actions["CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG"].type:
+      return {
+        ...state,
+        activitiesLog: state.activitiesLog.filter(
+          log =>
+            !(
+              log.activityId === action.payload.activityId &&
+              DateUtils.toCalendarString(
+                DateUtils.getDateString(log.timestamp)
+              ) === state.selectedDateString
+            )
+        )
       };
     default:
       return state;

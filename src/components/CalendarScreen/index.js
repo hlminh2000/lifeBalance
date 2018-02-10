@@ -29,18 +29,23 @@ const CalendarScreen = ({
   navigation,
   availableActivities,
   onActivityCheck,
-  selectedDateString = DateUtils.currentCalendarString(),
-  onDaySelect
+  selectedDateString,
+  isActivityActiveForDate = () => {},
+  onDaySelect,
+  activitiesLog
 }) => (
   <Container>
     <HeaderBar navigation={navigation} title="My Calendar" />
     <Calendar
       markedDates={{
-        [selectedDateString]: { selected: true, selectedColor: "blue" }
+        ...(selectedDateString
+          ? {
+              [selectedDateString]: { selected: true }
+            }
+          : {})
       }}
       style={{ elevation: 2 }}
       onDayPress={day => {
-        console.log("selected day", day);
         onDaySelect(day.dateString);
       }}
     />
@@ -60,7 +65,24 @@ const CalendarScreen = ({
               <Text> {title} </Text>
             </Body>
             <Right>
-              <CheckBox onValueChange={e => onActivityCheck(id)} />
+              <CheckBox
+                disabled={
+                  !(
+                    selectedDateString ===
+                    DateUtils.toCalendarString(DateUtils.getDateString())
+                  )
+                }
+                value={
+                  activitiesLog.filter(
+                    log =>
+                      log.activityId === id &&
+                      DateUtils.toCalendarString(
+                        DateUtils.getDateString(log.timestamp)
+                      ) === selectedDateString
+                  ).length > 0
+                }
+                onValueChange={e => onActivityCheck(id, e)}
+              />
             </Right>
           </ListItem>
         ))}
@@ -72,11 +94,21 @@ const CalendarScreen = ({
 export default connect(
   state => ({
     availableActivities: state.activitiesScreen.activityList,
-    selectedDateString: state.calendarScreen.selectedDateString
+    selectedDateString: state.calendarScreen.selectedDateString,
+    activitiesLog: state.calendarScreen.activitiesLog
   }),
   dispatch => ({
-    onActivityCheck: activityId => {
-      dispatch(actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].create(activityId));
+    onActivityCheck: (activityId, isChecked) => {
+      console.log("sdfgsdffdgh");
+      if (isChecked) {
+        dispatch(
+          actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].create(activityId)
+        );
+      } else {
+        dispatch(
+          actions["CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG"].create(activityId)
+        );
+      }
     },
     onDaySelect: dateString =>
       dispatch(actions["CALENDAR_SCREEN/DATE_SELECT"].create(dateString))

@@ -16,6 +16,7 @@
     "pixi.js": "^4.7.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-native-android-checkbox": "^3.1.1",
     "react-native-calendars": "^1.16.1",
     "react-native-canvas": "^0.1.20",
     "react-native-fab": "^1.0.6",
