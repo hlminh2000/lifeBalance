@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { StyleSheet, View, TouchableHighlight } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { DrawerNavigator } from "react-navigation";
 import { Text, List, ListItem } from "native-base";
 import ActivitiesScreen from "../../ActivitiesScreen/index.js";
@@ -12,9 +12,7 @@ const { height, width } = Dimensions.get("window");
 
 const NavigationItem = ({ title, navigationTarget, icon, navigation }) => (
   <View>
-    <TouchableHighlight onPress={() => navigation.navigate(navigationTarget)}>
-      <Text>{title}</Text>
-    </TouchableHighlight>
+    <Text onPress={() => navigation.navigate(navigationTarget)}>{title}</Text>
   </View>
 );
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableHighlight, ListView } from "react-native";
+import { Text, View, ListView } from "react-native";
 import {
   Container,
   Content,
@@ -64,13 +64,9 @@ export default ({
         <Body />
         <Right>
           <View style={{ flexDirection: "row" }}>
-            <TouchableHighlight onPress={onCancel}>
-              <Text>Cancel</Text>
-            </TouchableHighlight>
+            <Text onPress={onCancel}>Cancel</Text>
             <Text style={{ width: 30 }}> </Text>
-            <TouchableHighlight onPress={onComplete}>
-              <Text>Done</Text>
-            </TouchableHighlight>
+            <Text onPress={onComplete}>Done</Text>
           </View>
         </Right>
       </CardItem>
