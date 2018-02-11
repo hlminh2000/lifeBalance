@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "446988541908",
+    "firebase_url": "https://lifebalance-e467a.firebaseio.com",
+    "project_id": "lifebalance-e467a",
+    "storage_bucket": "lifebalance-e467a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446988541908:android:733dfe35fe8edc79",
+        "android_client_info": {
+          "package_name": "com.example.minh.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446988541908-kt6agqo1fs5recqjegh0o8ajkpg1773v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.minh.myapplication",
+            "certificate_hash": "ee8ad03f0e94c5e3b84272c7172104732ab5928b"
+          }
+        },
+        {
+          "client_id": "446988541908-jc8jksgrj7vjqcq5s565kkr82jluma3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO2WASfdF3e4ICTEeoPhULdrZkWFNhz04"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446988541908-jc8jksgrj7vjqcq5s565kkr82jluma3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
