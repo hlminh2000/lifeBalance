@@ -13,6 +13,7 @@ import platform from "./native-base-theme/variables/platform";
 import reducers from "./src/reducers.js";
 import RootDrawer from "./src/components/Navigations/Drawer/index.js";
 import STYLE from "./src/styleVariable";
+import AuthScreen from "./src/components/AuthScreen";
 
 const persistConfig = {
   key: "root",
@@ -44,7 +45,7 @@ export default class App extends Component<{}> {
                 backgroundColor={STYLE.COLOR_PRIMARY_DARK}
                 barStyle="light-content"
               />
-              <RootDrawer />
+              <AuthScreen successRender={props => <RootDrawer />} />
             </React.Fragment>
           </StyleProvider>
         </PersistGate>
