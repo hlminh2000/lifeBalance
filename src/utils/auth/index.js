@@ -1,2 +1,7 @@
-export facebookLogin from "./facebook";
-export googleLogin from "./google";
+import facebookLogin from "./facebook";
+import googleLogin from "./google";
+
+export default {
+  facebookLogin,
+  googleLogin
+};

@@ -1,7 +1,7 @@
 import { GoogleSignin } from "react-native-google-signin";
 
 // Calling this function will open Google for login.
-const googleLogin = async () => {
+export default async () => {
   try {
     // Add any configuration settings here:
     await GoogleSignin.configure();
@@ -19,9 +19,7 @@ const googleLogin = async () => {
     console.info(JSON.stringify(currentUser.toJSON()));
     return currentUser.toJSON();
   } catch (e) {
-    return e;
     console.error(e);
+    return e;
   }
 };
-
-export default googleLogin;

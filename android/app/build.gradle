@@ -94,8 +94,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "com.lifebalance"
@@ -137,6 +137,9 @@ android {
 }
 
 dependencies {
+    compile (project(':react-native-push-notification'))
+    compile (project(':react-native-google-signin'))
+    compile (project(':react-native-fbsdk'))
     compile(project(':react-native-firebase')) {
         transitive = false
     }
@@ -151,7 +154,9 @@ dependencies {
     compile project(':react-native-linear-gradient')
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.0.1"
+    compile ("com.android.support:appcompat-v7:26.0.1") {
+      force=true
+    }
     compile "com.facebook.react:react-native:+"  // From node_modules
 
     // Firebase dependencies
@@ -161,6 +166,10 @@ dependencies {
     compile ("com.google.android.gms:play-services-gcm:11.6.0") {
       force=true
     }
+    compile ("com.google.android.gms:play-services-auth:11.6.0") {
+      force=true
+    }
+
     compile "com.google.firebase:firebase-core:11.6.0"
     compile "com.google.firebase:firebase-auth:11.6.0"
 
