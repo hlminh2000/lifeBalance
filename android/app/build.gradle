@@ -143,7 +143,10 @@ dependencies {
     compile project(':appcenter-crashes')
     compile project(':appcenter-analytics')
     compile project(':appcenter')
-    compile project(':react-native-push-notification')
+    compile (project(':react-native-push-notification')){
+      // Excludes to match up with firebase dependency as below
+      exclude group: "com.google.android.gms"
+    }
     compile project(':react-native-android-checkbox')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-vector-icons')
@@ -152,7 +155,12 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
 
     // Firebase dependencies
-    compile "com.google.android.gms:play-services-base:11.6.0"
+    compile ("com.google.android.gms:play-services-base:11.6.0") {
+      force=true
+    }
+    compile ("com.google.android.gms:play-services-gcm:11.6.0") {
+      force=true
+    }
     compile "com.google.firebase:firebase-core:11.6.0"
 
 }
