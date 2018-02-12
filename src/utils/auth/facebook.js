@@ -1,4 +1,5 @@
 import { AccessToken, LoginManager } from "react-native-fbsdk";
+import firebaseApp from "../firebaseApp";
 import firebase from "react-native-firebase";
 
 // Calling the following function will open the FB login dialogue:

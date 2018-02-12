@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import { Text, Button } from "native-base";
+import { Text, Button, Icon } from "native-base";
 import { connect } from "react-redux";
 import Input from "../reusables/Input";
 import auth from "../../utils/auth";
+import actions from "./actions";
 
 const facebookLogin = async () => {
   const user = await auth.facebookLogin();
@@ -15,12 +16,20 @@ const googleLogin = async () => {
   return Promise.resolve(user);
 };
 
+const SocialButton = ({ iconName, title, ...rest }) => (
+  <Button {...rest} iconLeft>
+    <Icon name={iconName} />
+    <Text>{title}</Text>
+  </Button>
+);
+
 export default connect(
   state => ({
     currentUser: state.auth.currentUser
   }),
   dispatch => ({
-    onLoginComplete: user => console.log(user)
+    onLoginComplete: user =>
+      dispatch(actions["AUTH/LOGIN_COMPLETE"].create(user))
   })
 )(
   ({
@@ -34,26 +43,28 @@ export default connect(
       ) : (
         <View>
           <Text>log in!!!</Text>
-          <Button
+          <SocialButton
+            style={{ backgroundColor: "#0079FF" }}
             onPress={async () => {
               const user = await facebookLogin();
               if (user != "CANCELLED") {
                 onLoginComplete(user);
               }
             }}
-          >
-            <Text>Facebook</Text>
-          </Button>
-          <Button
+            title="Facebook"
+            iconName="logo-facebook"
+          />
+          <SocialButton
+            style={{ backgroundColor: "#D84132" }}
             onPress={async () => {
               const user = await googleLogin();
               if (user != "CANCELLED") {
                 onLoginComplete(user);
               }
             }}
-          >
-            <Text>Google</Text>
-          </Button>
+            title="Google"
+            iconName="logo-google"
+          />
         </View>
       )}
     </React.Fragment>

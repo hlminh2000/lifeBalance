@@ -3,13 +3,16 @@ import actions from "./actions";
 import moment from "moment";
 import DateUtils from "../../utils/DateUtils";
 
-const initialState = {};
+const initialState = {
+  currentUser: null
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actions["TEST"].type:
+    case actions["AUTH/LOGIN_COMPLETE"].type:
       return {
-        ...state
+        ...state,
+        currentUser: action.payload.user
       };
     default:
       return state;
