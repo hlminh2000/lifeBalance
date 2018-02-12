@@ -10,7 +10,7 @@ export default async () => {
     ]);
 
     if (result.isCancelled) {
-      throw new Error("User cancelled request"); // Handle this however fits the flow of your app
+      return Promise.reject("CANCELLED");
     }
 
     console.log(
@@ -36,6 +36,6 @@ export default async () => {
     return currentUser.toJSON();
   } catch (e) {
     console.error(e);
-    return e;
+    return Promise.reject(e);
   }
 };

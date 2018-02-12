@@ -20,6 +20,6 @@ export default async () => {
     return currentUser.toJSON();
   } catch (e) {
     console.error(e);
-    return e;
+    return Promise.reject(e);
   }
 };
