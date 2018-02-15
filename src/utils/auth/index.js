@@ -1,7 +1,9 @@
 import facebookLogin from "./facebook";
 import googleLogin from "./google";
+import firebase from "react-native-firebase";
 
 export default {
   facebookLogin,
-  googleLogin
+  googleLogin,
+  getCurrentUser: () => firebase.auth().currentUser
 };

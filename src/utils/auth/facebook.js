@@ -1,8 +1,8 @@
 import { AccessToken, LoginManager } from "react-native-fbsdk";
-import firebaseApp from "../firebaseApp";
 import firebase from "react-native-firebase";
 
 // Calling the following function will open the FB login dialogue:
+window.firebase = firebase;
 export default async () => {
   try {
     const result = await LoginManager.logInWithReadPermissions([
@@ -21,6 +21,8 @@ export default async () => {
     // get the access token
     const data = await AccessToken.getCurrentAccessToken();
 
+    console.log("data: ", data);
+
     if (!data) {
       throw new Error("Something went wrong obtaining the users access token"); // Handle this however fits the flow of your app
     }
@@ -30,11 +32,16 @@ export default async () => {
       data.accessToken
     );
 
+    console.log("credential: ", credential);
     // login with credential
-    const currentUser = await firebase.auth().signInWithCredential(credential);
+    // const currentUser = await firebase.auth().signInWithCredential(credential);
+    const currentUser = await firebase
+      .auth()
+      .signInAndRetrieveDataWithCredential(credential);
 
-    console.info(JSON.stringify(currentUser.toJSON()));
-    return currentUser.toJSON();
+    console.log("currentUser: ", currentUser);
+
+    return currentUser;
   } catch (e) {
     console.error(e);
     return Promise.reject(e);

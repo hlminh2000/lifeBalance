@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import { Text, Button, Icon } from "native-base";
+import { Text, Button, Icon, Card, CardItem } from "native-base";
 import { connect } from "react-redux";
 import Input from "../reusables/Input";
 import auth from "../../utils/auth";
 import actions from "./actions";
+import LinearGradient from "react-native-linear-gradient";
+import STYLE from "../../styleVariable";
 
 const facebookLogin = async () => {
   const user = await auth.facebookLogin();
@@ -38,34 +40,45 @@ export default connect(
     onLoginComplete
   }) => (
     <React.Fragment>
-      {currentUser ? (
+      {auth.getCurrentUser() ? (
         successRender()
       ) : (
-        <View>
-          <Text>log in!!!</Text>
-          <SocialButton
-            style={{ backgroundColor: "#0079FF" }}
-            onPress={async () => {
-              const user = await facebookLogin();
-              if (user != "CANCELLED") {
-                onLoginComplete(user);
+        <LinearGradient
+          colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Card style={{ maxWidth: 300, maxHeight: 200 }}>
+            <CardItem
+              style={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <Text>Log in with</Text>
+              <SocialButton
+                style={{ backgroundColor: "#0079FF" }}
+                onPress={async () => {
+                  const user = await facebookLogin();
+                  if (user != "CANCELLED") {
+                    onLoginComplete(user);
+                  }
+                }}
+                title="Facebook"
+                iconName="logo-facebook"
+              />
+              {
+                // <SocialButton
+                //   style={{ backgroundColor: "#D84132" }}
+                //   onPress={async () => {
+                //     const user = await googleLogin();
+                //     if (user != "CANCELLED") {
+                //       onLoginComplete(user);
+                //     }
+                //   }}
+                //   title="Google"
+                //   iconName="logo-google"
+                // />
               }
-            }}
-            title="Facebook"
-            iconName="logo-facebook"
-          />
-          <SocialButton
-            style={{ backgroundColor: "#D84132" }}
-            onPress={async () => {
-              const user = await googleLogin();
-              if (user != "CANCELLED") {
-                onLoginComplete(user);
-              }
-            }}
-            title="Google"
-            iconName="logo-google"
-          />
-        </View>
+            </CardItem>
+          </Card>
+        </LinearGradient>
       )}
     </React.Fragment>
   )
