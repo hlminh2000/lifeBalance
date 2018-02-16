@@ -45,7 +45,9 @@ export default class App extends Component<{}> {
                 backgroundColor={STYLE.COLOR_PRIMARY_DARK}
                 barStyle="light-content"
               />
-              <AuthScreen successRender={props => <RootDrawer />} />
+              <AuthScreen
+                successRender={({ ...props }) => <RootDrawer {...props} />}
+              />
             </React.Fragment>
           </StyleProvider>
         </PersistGate>

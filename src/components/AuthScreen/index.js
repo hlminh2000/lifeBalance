@@ -55,9 +55,9 @@ export default connect(
               <SocialButton
                 style={{ backgroundColor: "#0079FF" }}
                 onPress={async () => {
-                  const user = await facebookLogin();
-                  if (user != "CANCELLED") {
-                    onLoginComplete(user);
+                  const authResult = await facebookLogin();
+                  if (authResult != "CANCELLED") {
+                    onLoginComplete(authResult.user);
                   }
                 }}
                 title="Facebook"

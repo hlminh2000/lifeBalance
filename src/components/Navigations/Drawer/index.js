@@ -9,28 +9,9 @@ import CalendarScreen from "../../CalendarScreen/index.js";
 import LinearGradient from "react-native-linear-gradient";
 import STYLE from "../../../styleVariable";
 import auth from "../../../utils/auth";
+import DrawerComponent from "./DrawerComponent";
 
 const { height, width } = Dimensions.get("window");
-
-const NavigationItem = ({ title, navigationTarget, icon, navigation }) => (
-  <View>
-    <Text onPress={() => navigation.navigate(navigationTarget)}>{title}</Text>
-  </View>
-);
-
-console.log("NavigationItem: ", NavigationItem);
-
-const UserSection = connect(
-  state => ({ user: state.auth.currentUser }),
-  dispatch => ({})
-)(({ user }) => (
-  <LinearGradient
-    colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
-    style={{ height: 200 }}
-  >
-    {user.displayName}
-  </LinearGradient>
-));
 
 const RootDrawer = DrawerNavigator(
   {
@@ -45,57 +26,7 @@ const RootDrawer = DrawerNavigator(
   },
   {
     drawerWidth: width * 0.85,
-    contentComponent: ({ navigation }) => (
-      <View>
-        <UserSection />
-        <List>
-          {[
-            {
-              title: "My Calendar",
-              navigationTarget: "CalendarScreen",
-              icon: ""
-            },
-            {
-              title: "My Activities",
-              navigationTarget: "ActivitiesScreen",
-              icon: ""
-            }
-          ].map((menuItem, i) => (
-            <ListItem style={{ borderBottomWidth: 0 }} key={i}>
-              <NavigationItem key={i} {...menuItem} navigation={navigation} />
-            </ListItem>
-          ))}
-        </List>
-      </View>
-    )
-    // connect(
-    //   state => ({
-    //     user: state.currentUser
-    //   }),
-    //   dispatch => ({})
-    // )(({ user }) => (
-    //   <View>
-    //     <UserSection user={user} />
-    //     <List>
-    //       {[
-    //         {
-    //           title: "My Calendar",
-    //           navigationTarget: "CalendarScreen",
-    //           icon: ""
-    //         },
-    //         {
-    //           title: "My Activities",
-    //           navigationTarget: "ActivitiesScreen",
-    //           icon: ""
-    //         }
-    //       ].map((menuItem, i) => (
-    //         <ListItem style={{ borderBottomWidth: 0 }} key={i}>
-    //           <NavigationItem key={i} {...menuItem} navigation={navigation} />
-    //         </ListItem>
-    //       ))}
-    //     </List>
-    //   </View>
-    // ))
+    contentComponent: DrawerComponent
   }
 );
 
