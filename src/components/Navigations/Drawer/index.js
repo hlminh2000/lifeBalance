@@ -18,14 +18,19 @@ const NavigationItem = ({ title, navigationTarget, icon, navigation }) => (
   </View>
 );
 
-const UserSection = ({ user }) => (
+console.log("NavigationItem: ", NavigationItem);
+
+const UserSection = connect(
+  state => ({ user: state.auth.currentUser }),
+  dispatch => ({})
+)(({ user }) => (
   <LinearGradient
     colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
     style={{ height: 200 }}
   >
     {user.displayName}
   </LinearGradient>
-);
+));
 
 const RootDrawer = DrawerNavigator(
   {
@@ -42,7 +47,7 @@ const RootDrawer = DrawerNavigator(
     drawerWidth: width * 0.85,
     contentComponent: ({ navigation }) => (
       <View>
-        <UserSection user={{}} />
+        <UserSection />
         <List>
           {[
             {
