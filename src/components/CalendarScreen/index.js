@@ -23,6 +23,7 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import HeaderBar from "../HeaderBar/index.js";
 import icons from "../icons";
 import DateUtils from "../../utils/DateUtils";
+import CircularSlider from "./CircularSlider";
 
 const CalendarScreen = ({
   day,
@@ -47,6 +48,20 @@ const CalendarScreen = ({
       style={{ elevation: 2 }}
       onDayPress={day => {
         onDaySelect(day.dateString);
+      }}
+      dayComponent={({ date, state }) => {
+        return (
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: state === "disabled" ? "gray" : "black"
+              }}
+            >
+              {date.day}
+            </Text>
+          </View>
+        );
       }}
     />
     <Content>
