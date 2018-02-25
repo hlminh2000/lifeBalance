@@ -113,7 +113,7 @@ const createArch = ({
 };
 
 const arch = createArch({ color: 0x42deae });
-const reverseArc = createArch({ reverse: true, color: 0, opacity: 0.5 });
+const reverseArc = createArch({ reverse: true, color: 0, opacity: 0.2 });
 const minCircleSprite = createScrubber({
   stateModelKey: "minValue",
   color: 0xffffff,
