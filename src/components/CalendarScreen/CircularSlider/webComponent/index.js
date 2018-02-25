@@ -1,5 +1,5 @@
 const containerDiv = document.getElementById("appContainer");
-const zoomLevel = 4;
+const zoomLevel = 5;
 const canvasWidth = containerDiv.offsetWidth;
 const canvasHeight = containerDiv.offsetHeight;
 const screenCenter = {
@@ -27,6 +27,8 @@ const pixiApp = new PIXI.Application({
 });
 const stage = pixiApp.stage;
 stage.interactive = true;
+
+window.ctx = document.getElementById("mainCanvas").getContext("2d");
 
 const degreeToRadians = degrees => degrees * Math.PI / 180;
 const radiansToDegree = radians => radians * 180 / Math.PI;
@@ -63,17 +65,22 @@ const positionToValue = ({ x, y }) => {
   return deltaX >= 0 ? value : -value;
 };
 
-const createScrubber = ({ stateModelKey }) => {
-  const sprite = new PIXI.Graphics().beginFill("0").drawCircle(0, 0, 5);
-  sprite.interactive = true;
-  sprite.buttonMode = true;
-  sprite.on("pointerdown", e => (modelState.updatingField = stateModelKey));
+const createScrubber = ({ stateModelKey, color = 0xffffff, radius = 5 }) => {
+  const sprite = new PIXI.Graphics().beginFill(color).drawCircle(0, 0, radius);
+  const hitArea = new PIXI.Graphics()
+    .beginFill(color, 0)
+    .drawCircle(0, 0, radius * 5);
+  hitArea.interactive = true;
+  hitArea.on("pointerdown", e => (modelState.updatingField = stateModelKey));
   stage.on("pointermove", e => {
     if (modelState.updatingField === stateModelKey) {
       modelState[stateModelKey] = positionToValue(e.data.global);
     }
   });
   stage.on("pointerup", e => (modelState.updatingField = null));
+  sprite.addChild(hitArea);
+  sprite.interactive = true;
+  sprite.buttonMode = true;
   return sprite;
 };
 
@@ -105,10 +112,18 @@ const createArch = ({
   return archGraphics;
 };
 
-const arch = createArch({});
+const arch = createArch({ color: 0x42deae });
 const reverseArc = createArch({ reverse: true, color: 0, opacity: 0.5 });
-const minCircleSprite = createScrubber({ stateModelKey: "minValue" });
-const maxCircleSprite = createScrubber({ stateModelKey: "maxValue" });
+const minCircleSprite = createScrubber({
+  stateModelKey: "minValue",
+  color: 0xffffff,
+  radius: 2.5
+});
+const maxCircleSprite = createScrubber({
+  stateModelKey: "maxValue",
+  color: 0xffffff,
+  radius: 2.5
+});
 
 stage.addChild(arch);
 stage.addChild(reverseArc);
