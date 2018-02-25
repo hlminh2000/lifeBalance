@@ -14,6 +14,7 @@ import reducers from "./src/reducers.js";
 import RootDrawer from "./src/components/Navigations/Drawer/index.js";
 import STYLE from "./src/styleVariable";
 import AuthScreen from "./src/components/AuthScreen";
+import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
 
 const persistConfig = {
   key: "root",
@@ -35,7 +36,7 @@ const persistor = persistStore(store);
 export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
-    persistor.purge();
+    // persistor.purge();
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
