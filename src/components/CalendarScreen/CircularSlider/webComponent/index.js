@@ -19,8 +19,8 @@ const modelState = {
   updatingField: false
 };
 
-const dispatchPublicEvent = (message, payload) => {
-  console.log(message, payload);
+const dispatchPublicEvent = ({ message, payload }) => {
+  window.postMessage({ message, payload }, "*");
 };
 
 const pixiApp = new PIXI.Application({
@@ -86,8 +86,11 @@ const createScrubber = ({ stateModelKey, color = 0xffffff, radius = 5 }) => {
   stage.on("pointermove", e => {
     if (modelState.updatingField === stateModelKey) {
       modelState[stateModelKey] = positionToValue(e.data.global);
-      dispatchPublicEvent("VALUE_CHANGE", {
-        state: modelState
+      dispatchPublicEvent({
+        message: "VALUE_CHANGE",
+        payload: {
+          state: modelState
+        }
       });
     }
   });
