@@ -1,20 +1,26 @@
 const containerDiv = document.getElementById("appContainer");
-const zoomLevel = 5;
-const canvasWidth = containerDiv.offsetWidth;
-const canvasHeight = containerDiv.offsetHeight;
+const zoomLevel = 1;
+const canvasWidth = containerDiv.offsetWidth * 2;
+const canvasHeight = containerDiv.offsetHeight * 2;
 const screenCenter = {
   x: canvasWidth / (2 * zoomLevel),
   y: canvasHeight / (2 * zoomLevel)
 };
 const config = {
-  radius: 20,
+  radius: 200,
   maxValue: 20,
-  minValue: 0
+  minValue: 0,
+  thickness: 60,
+  archColor: 0x42deae
 };
 const modelState = {
   minValue: 0,
   maxValue: 10,
   updatingField: false
+};
+
+const dispatchPublicEvent = (message, payload) => {
+  console.log(message, payload);
 };
 
 const pixiApp = new PIXI.Application({
@@ -66,7 +72,12 @@ const positionToValue = ({ x, y }) => {
 };
 
 const createScrubber = ({ stateModelKey, color = 0xffffff, radius = 5 }) => {
-  const sprite = new PIXI.Graphics().beginFill(color).drawCircle(0, 0, radius);
+  const backDrop = new PIXI.Graphics()
+    .beginFill(config.archColor)
+    .drawCircle(0, 0, radius);
+  const sprite = new PIXI.Graphics()
+    .beginFill(color)
+    .drawCircle(0, 0, radius * 0.9);
   const hitArea = new PIXI.Graphics()
     .beginFill(color, 0)
     .drawCircle(0, 0, radius * 5);
@@ -75,18 +86,22 @@ const createScrubber = ({ stateModelKey, color = 0xffffff, radius = 5 }) => {
   stage.on("pointermove", e => {
     if (modelState.updatingField === stateModelKey) {
       modelState[stateModelKey] = positionToValue(e.data.global);
+      dispatchPublicEvent("VALUE_CHANGE", {
+        state: modelState
+      });
     }
   });
   stage.on("pointerup", e => (modelState.updatingField = null));
+  backDrop.addChild(sprite);
   sprite.addChild(hitArea);
   sprite.interactive = true;
   sprite.buttonMode = true;
-  return sprite;
+  return backDrop;
 };
 
 const createArch = ({
   color = 0,
-  thickness = 5,
+  thickness = config.thickness,
   reverse = false,
   opacity = 1
 }) => {
@@ -112,17 +127,17 @@ const createArch = ({
   return archGraphics;
 };
 
-const arch = createArch({ color: 0x42deae });
+const arch = createArch({ color: config.archColor });
 const reverseArc = createArch({ reverse: true, color: 0, opacity: 0.2 });
 const minCircleSprite = createScrubber({
   stateModelKey: "minValue",
   color: 0xffffff,
-  radius: 2.5
+  radius: config.thickness / 2
 });
 const maxCircleSprite = createScrubber({
   stateModelKey: "maxValue",
   color: 0xffffff,
-  radius: 2.5
+  radius: config.thickness / 2
 });
 
 stage.addChild(arch);
