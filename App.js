@@ -15,6 +15,7 @@ import RootDrawer from "./src/components/Navigations/Drawer/index.js";
 import STYLE from "./src/styleVariable";
 import AuthScreen from "./src/components/AuthScreen";
 import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
+import CircularTimeRangeSlider from "./src/components/CalendarScreen/CircularTimeRangeSlider/index.js";
 
 const persistConfig = {
   key: "root",
