@@ -112,33 +112,33 @@ const init = () => {
   const createArch = ({
     color = 0,
     arcThickness = config.arcThickness,
-    reverse = false,
+    isStatic = false,
     opacity = 1
   }) => {
     const archGraphics = new PIXI.Graphics();
-    archGraphics.render = () => {
-      archGraphics
-        .clear()
-        .lineStyle(arcThickness, color, opacity)
-        .arc(
-          0,
-          0,
-          config.radius,
-          reverse
-            ? valueToRadian(modelState.maxValue)
-            : valueToRadian(modelState.minValue),
-          reverse
-            ? valueToRadian(modelState.minValue)
-            : valueToRadian(modelState.maxValue)
-        );
-    };
+    archGraphics.render = () =>
+      isStatic
+        ? archGraphics
+            .clear()
+            .lineStyle(arcThickness, color, opacity)
+            .drawCircle(0, 0, config.radius)
+        : archGraphics
+            .clear()
+            .lineStyle(arcThickness, color, opacity)
+            .arc(
+              0,
+              0,
+              config.radius,
+              valueToRadian(modelState.minValue),
+              valueToRadian(modelState.maxValue)
+            );
     archGraphics.x = screenCenter.x;
     archGraphics.y = screenCenter.y;
     return archGraphics;
   };
 
   const arch = createArch({ color: config.arcColor });
-  const reverseArc = createArch({ reverse: true, color: 0, opacity: 0.2 });
+  const reverseArc = createArch({ isStatic: true, color: 0, opacity: 0.2 });
   const minCircleSprite = createScrubber({
     stateModelKey: "minValue",
     color: 0xffffff,
@@ -150,8 +150,8 @@ const init = () => {
     radius: config.arcThickness / 2
   });
 
-  stage.addChild(arch);
   stage.addChild(reverseArc);
+  stage.addChild(arch);
   stage.addChild(minCircleSprite);
   stage.addChild(maxCircleSprite);
 
