@@ -39,8 +39,6 @@ const init = () => {
   const stage = pixiApp.stage;
   stage.interactive = true;
 
-  window.ctx = document.getElementById("mainCanvas").getContext("2d");
-
   const degreeToRadians = degrees => degrees * Math.PI / 180;
   const radiansToDegree = radians => radians * 180 / Math.PI;
 
