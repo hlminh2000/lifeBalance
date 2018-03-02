@@ -15,7 +15,7 @@ import RootDrawer from "./src/components/Navigations/Drawer/index.js";
 import STYLE from "./src/styleVariable";
 import AuthScreen from "./src/components/AuthScreen";
 import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
-import CircularTimeRangeSlider from "./src/components/CalendarScreen/CircularTimeRangeSlider/index.js";
+import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
 
 const persistConfig = {
   key: "root",
@@ -38,6 +38,7 @@ export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
     // persistor.purge();
+<<<<<<< HEAD
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -55,5 +56,8 @@ export default class App extends Component<{}> {
         </PersistGate>
       </Provider>
     );
+=======
+    return <CircularTimeRangeSelector />;
+>>>>>>> fixes bug
   }
 }
