@@ -25,7 +25,6 @@ const init = () => {
 
   const dispatchPublicEvent = ({ message, payload }) => {
     window.postMessage(JSON.stringify({ message, payload }), "*");
-    console.log(config);
   };
 
   const pixiApp = new PIXI.Application({
