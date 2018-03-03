@@ -34,9 +34,9 @@ export default class CircularSlider extends React.Component {
             window.arcColor = ${arcColor};
             window.minValueInitial = ${minValueInitial};
             window.maxValueInitial = ${maxValueInitial};
-            window.interval = ${maxValueInitial};
+            window.interval = ${interval};
             init();
-          `}
+        `}
         style={{
           position: "absolute",
           top: 0,

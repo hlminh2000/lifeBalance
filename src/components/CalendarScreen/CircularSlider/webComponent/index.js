@@ -13,9 +13,9 @@ const init = () => {
     minValue: window.minValue || 0,
     arcThickness: window.arcThickness || 60,
     arcColor: window.arcColor || 0x42deae,
-    minValueInitial: window.minValueInitial || 0,
-    maxValueInitial: window.maxValueInitial || 5,
-    interval: window.interval || 100
+    minValueInitial: window.minValueInitial || 540,
+    maxValueInitial: window.maxValueInitial || 1020,
+    interval: window.interval || 15
   };
   const modelState = {
     minValue: config.minValueInitial,
@@ -25,7 +25,7 @@ const init = () => {
 
   const dispatchPublicEvent = ({ message, payload }) => {
     window.postMessage(JSON.stringify({ message, payload }), "*");
-    console.log(message, payload);
+    console.log(config);
   };
 
   const pixiApp = new PIXI.Application({

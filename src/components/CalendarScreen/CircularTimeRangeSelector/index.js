@@ -4,8 +4,8 @@ import CircularSlider from "../CircularSlider";
 
 export default class CircularTimeRangeSlider extends Component {
   state = {
-    minValue: 0,
-    maxValue: 15
+    minValue: 540,
+    maxValue: 1020
   };
   getDeltaTime = () => {
     const { maxValue, minValue } = this.state;
