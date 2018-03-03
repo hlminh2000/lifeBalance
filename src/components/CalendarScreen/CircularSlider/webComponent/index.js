@@ -85,7 +85,7 @@ const init = () => {
       .drawCircle(0, 0, radius * 0.9);
     const hitArea = new PIXI.Graphics()
       .beginFill(color, 0)
-      .drawCircle(0, 0, radius * 5);
+      .drawCircle(0, 0, radius * 3);
     hitArea.interactive = true;
     hitArea.on("pointerdown", e => (modelState.updatingField = stateModelKey));
     stage.on("pointermove", e => {
