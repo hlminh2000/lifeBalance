@@ -8,26 +8,25 @@ export default class CircularSlider extends React.Component {
       maxValue = 720,
       minValue = 0,
       arcThickness = 70,
-      arcColor = 0xd84132,
+      arcColor = null,
       minValueInitial = 10,
       maxValueInitial = 15,
       interval = 2,
       onValueChange = minMax => {}
     } = this.props;
     return (
-      <View>
-        <WebView
-          source={require("./webComponent/index.html")}
-          onMessage={e => {
-            const { payload: { state: { minValue, maxValue } } } = JSON.parse(
-              e.nativeEvent.data
-            );
-            onValueChange({
-              min: minValue,
-              max: maxValue
-            });
-          }}
-          injectedJavaScript={`
+      <WebView
+        source={require("./webComponent/index.html")}
+        onMessage={e => {
+          const { payload: { state: { minValue, maxValue } } } = JSON.parse(
+            e.nativeEvent.data
+          );
+          onValueChange({
+            min: minValue,
+            max: maxValue
+          });
+        }}
+        injectedJavaScript={`
             window.radius = ${radius};
             window.maxValue = ${maxValue};
             window.minValue = ${minValue};
@@ -38,17 +37,16 @@ export default class CircularSlider extends React.Component {
             window.interval = ${maxValueInitial};
             init();
           `}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: radius + arcThickness,
-            height: radius + arcThickness,
-            borderColor: "#000000",
-            borderWidth: 0.5
-          }}
-        />
-      </View>
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: radius + arcThickness / 2,
+          height: radius + arcThickness / 2,
+          borderColor: "#000000",
+          borderWidth: 0.5
+        }}
+      />
     );
   }
 }
