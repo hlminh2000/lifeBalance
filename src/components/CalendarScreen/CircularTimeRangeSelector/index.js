@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { WebView, View, Text } from "react-native";
 import CircularSlider from "../CircularSlider";
+import style from "../../../styleVariable";
 
 export default class CircularTimeRangeSlider extends Component {
   state = {
@@ -9,7 +10,11 @@ export default class CircularTimeRangeSlider extends Component {
   };
   getDeltaTime = () => {
     const { maxValue, minValue } = this.state;
-    const diff = maxValue - minValue;
+    const minutesPerDay = 24 * 60;
+    const diff =
+      maxValue - minValue >= 0
+        ? maxValue - minValue
+        : minutesPerDay + (maxValue - minValue);
     const hours = Math.floor(diff / 60);
     return {
       hours,
@@ -57,8 +62,15 @@ export default class CircularTimeRangeSlider extends Component {
             }}
           />
         </View>
-        <View>
-          <Text>{`${deltaTime.hours}h ${deltaTime.minutes}m`}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={{ color: style.COLOR_PRIMARY, fontSize: 30 }}>
+            {`${deltaTime.hours > 9 ? deltaTime.hours : `0${deltaTime.hours}`}`}
+          </Text>
+          <Text>h</Text>
+          <Text style={{ color: style.COLOR_PRIMARY, fontSize: 30 }}>{` ${
+            deltaTime.minutes > 9 ? deltaTime.minutes : `0${deltaTime.minutes}`
+          }`}</Text>
+          <Text>m</Text>
         </View>
       </View>
     );
