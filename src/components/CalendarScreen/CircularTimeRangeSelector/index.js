@@ -51,6 +51,7 @@ export default class CircularTimeRangeSlider extends Component {
               interval: 15,
               radius,
               arcThickness,
+              arcColor: eval(style.COLOR_PRIMARY.split("#").join("0x")),
               minValueInitial: this.state.minValue,
               maxValueInitial: this.state.maxValue,
               onValueChange: ({ min, max }) => {
