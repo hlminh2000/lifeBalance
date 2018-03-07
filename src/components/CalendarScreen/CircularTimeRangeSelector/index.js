@@ -38,15 +38,26 @@ export default class CircularTimeRangeSlider extends Component {
     const timeTo = this.getTimeFromMinute(to);
     const leftPad = num => (num > 9 ? num : `0${num}`);
     return (
-      <View style={{ alignItems: "center" }}>
-        <View style={{ justifyContent: "space-around", flexDirection: "row" }}>
-          <View>
-            <Text>{`${leftPad(timeFrom.hours)}:${leftPad(
-              timeFrom.minutes
-            )}`}</Text>
+      <View style={{ alignItems: "center", backgroundColor: "#ffffff" }}>
+        <View
+          style={{
+            marginBottom: 10,
+            width: "100%",
+            justifyContent: "space-around",
+            flexDirection: "row"
+          }}
+        >
+          <View style={{ alignItems: "center" }}>
+            <Text>from</Text>
+            <Text
+              style={{ color: style.COLOR_PRIMARY, fontSize: 25 }}
+            >{`${leftPad(timeFrom.hours)}:${leftPad(timeFrom.minutes)}`}</Text>
           </View>
-          <View>
-            <Text>{`${leftPad(timeTo.hours)}:${leftPad(timeTo.minutes)}`}</Text>
+          <View style={{ alignItems: "center" }}>
+            <Text>to</Text>
+            <Text
+              style={{ color: style.COLOR_PRIMARY, fontSize: 25 }}
+            >{`${leftPad(timeTo.hours)}:${leftPad(timeTo.minutes)}`}</Text>
           </View>
         </View>
         <View
