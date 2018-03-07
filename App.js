@@ -35,7 +35,7 @@ const persistor = persistStore(store);
 export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
-    // persistor.purge();
+    persistor.purge();
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
