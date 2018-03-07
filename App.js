@@ -38,7 +38,6 @@ export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
     // persistor.purge();
-<<<<<<< HEAD
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -56,8 +55,5 @@ export default class App extends Component<{}> {
         </PersistGate>
       </Provider>
     );
-=======
-    return <CircularTimeRangeSelector />;
->>>>>>> fixes bug
   }
 }
