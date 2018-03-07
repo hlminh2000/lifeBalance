@@ -16,6 +16,7 @@ import STYLE from "./src/styleVariable";
 import AuthScreen from "./src/components/AuthScreen";
 import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
 import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
+import TimeSetterModal from "./src/components/CalendarScreen/TimeSetterModal";
 
 const persistConfig = {
   key: "root",
@@ -38,6 +39,7 @@ export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
     // persistor.purge();
+    // return <TimeSetterModal isVisible={true} />;
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
