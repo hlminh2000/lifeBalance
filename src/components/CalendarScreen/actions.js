@@ -26,7 +26,7 @@ export default {
       type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY",
       payload: { activityId }
     })
-  }
+  },
   "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL": {
     type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL",
     create: () => ({
