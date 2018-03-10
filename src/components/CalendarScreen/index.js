@@ -49,20 +49,23 @@ const CalendarScreen = ({
       onDayPress={day => {
         onDaySelect(day.dateString);
       }}
-      dayComponent={({ date, state }) => {
-        return (
-          <View style={{ flex: 1 }}>
-            <Text
-              style={{
-                textAlign: "center",
-                color: state === "disabled" ? "gray" : "black"
-              }}
-            >
-              {date.day}
-            </Text>
-          </View>
-        );
-      }}
+      dayComponent={
+        null
+      //   ({ date, state }) => {
+      //   return (
+      //     <View style={{ flex: 1 }}>
+      //       <Text
+      //         style={{
+      //           textAlign: "center",
+      //           color: state === "disabled" ? "gray" : "black"
+      //         }}
+      //       >
+      //         {date.day}
+      //       </Text>
+      //     </View>
+      //   );
+      // }
+      }
     />
     <Content>
       <List>
