@@ -53,20 +53,20 @@ const CalendarScreen = ({
       }}
       dayComponent={
         null
-      //   ({ date, state }) => {
-      //   return (
-      //     <View style={{ flex: 1 }}>
-      //       <Text
-      //         style={{
-      //           textAlign: "center",
-      //           color: state === "disabled" ? "gray" : "black"
-      //         }}
-      //       >
-      //         {date.day}
-      //       </Text>
-      //     </View>
-      //   );
-      // }
+        //   ({ date, state }) => {
+        //   return (
+        //     <View style={{ flex: 1 }}>
+        //       <Text
+        //         style={{
+        //           textAlign: "center",
+        //           color: state === "disabled" ? "gray" : "black"
+        //         }}
+        //       >
+        //         {date.day}
+        //       </Text>
+        //     </View>
+        //   );
+        // }
       }
     />
     <Content>
@@ -117,10 +117,13 @@ const CalendarScreen = ({
 );
 
 export default connect(
-  state => ({
-    availableActivities: state.activitiesScreen.activityList,
-    selectedDateString: state.calendarScreen.selectedDateString,
-    activitiesLog: state.calendarScreen.activitiesLog
+  ({
+    activitiesScreen: { activityList },
+    calendarScreen: { selectedDateString, activitiesLog }
+  }) => ({
+    availableActivities: activityList,
+    selectedDateString,
+    activitiesLog
   }),
   dispatch => ({
     onActivityCheck: (activityId, isChecked, selectedDateString) => {
@@ -140,12 +143,8 @@ export default connect(
         );
       }
     },
-    onNewActivityCancel: () => {
-
-    },
-    onNewActivityTimeSet: () => {
-
-    },
+    onNewActivityCancel: () => {},
+    onNewActivityTimeSet: () => {},
     onDaySelect: dateString =>
       dispatch(actions["CALENDAR_SCREEN/DATE_SELECT"].create(dateString))
   })
