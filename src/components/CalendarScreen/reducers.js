@@ -5,7 +5,8 @@ import DateUtils from "../../utils/DateUtils";
 
 const initialState = {
   selectedDateString: DateUtils.toCalendarString(DateUtils.getDateString()),
-  activitiesLog: []
+  activitiesLog: [],
+  newStagingActivityLog: null,
 };
 
 const newActivityLog = activityId => ({
@@ -18,6 +19,16 @@ const newActivityLog = activityId => ({
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case action["CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL"].type:
+      return {
+        ...state,
+        newStagingActivityLog: null
+      }
+    case action["CALENDAR_SCREEN/NEW_STAGING_ACTIVITY"].type:
+      return {
+        ...state,
+        newStagingActivityLog: newActivityLog(action.payload.activityId)
+      };
     case actions["CALENDAR_SCREEN/NEW_ACTIVITY_LOG"].type:
       return {
         ...state,

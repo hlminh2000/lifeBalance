@@ -19,5 +19,19 @@ export default {
       type: "CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG",
       payload: { activityId, selectedDateString }
     })
+  },
+  "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY": {
+    type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY",
+    create: (activityId) => ({
+      type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY",
+      payload: { activityId }
+    })
+  }
+  "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL": {
+    type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL",
+    create: () => ({
+      type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL",
+      payload: {}
+    })
   }
 };

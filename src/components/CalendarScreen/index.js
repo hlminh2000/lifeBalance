@@ -33,7 +33,7 @@ const CalendarScreen = ({
   selectedDateString,
   isActivityActiveForDate = () => {},
   onNewActivityCancel = () => {},
-  onNewActivitySubmit = () => {},
+  onNewActivityTimeSet = () => {},
   onDaySelect,
   activitiesLog
 }) => (
@@ -110,7 +110,7 @@ const CalendarScreen = ({
     </Content>
     <TimeSetterModal
       onCancel={onNewActivityCancel}
-      onComplete={onNewActivitySubmit}
+      onComplete={onNewActivityTimeSet}
       isVisible={true}
     />
   </Container>
@@ -143,7 +143,7 @@ export default connect(
     onNewActivityCancel: () => {
 
     },
-    onNewActivitySubmit: () => {
+    onNewActivityTimeSet: () => {
 
     },
     onDaySelect: dateString =>
