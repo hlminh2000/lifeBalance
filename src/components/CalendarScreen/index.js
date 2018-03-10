@@ -23,7 +23,7 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import HeaderBar from "../HeaderBar/index.js";
 import icons from "../icons";
 import DateUtils from "../../utils/DateUtils";
-import CircularSlider from "./CircularSlider";
+import TimeSetterModal from "./TimeSetterModal";
 
 const CalendarScreen = ({
   day,
@@ -32,6 +32,8 @@ const CalendarScreen = ({
   onActivityCheck,
   selectedDateString,
   isActivityActiveForDate = () => {},
+  onNewActivityCancel = () => {},
+  onNewActivitySubmit = () => {},
   onDaySelect,
   activitiesLog
 }) => (
@@ -106,6 +108,11 @@ const CalendarScreen = ({
         ))}
       </List>
     </Content>
+    <TimeSetterModal
+      onCancel={onNewActivityCancel}
+      onComplete={onNewActivitySubmit}
+      isVisible={true}
+    />
   </Container>
 );
 
@@ -132,6 +139,12 @@ export default connect(
           )
         );
       }
+    },
+    onNewActivityCancel: () => {
+
+    },
+    onNewActivitySubmit: () => {
+
     },
     onDaySelect: dateString =>
       dispatch(actions["CALENDAR_SCREEN/DATE_SELECT"].create(dateString))
