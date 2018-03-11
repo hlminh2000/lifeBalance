@@ -22,7 +22,6 @@ import { Platform } from "react-native";
 import { setCustomSourceTransformer } from "react-native/Libraries/Image/resolveAssetSource";
 
 setCustomSourceTransformer(function(resolver) {
-  console.log(resolver);
   if (
     Platform.OS === "android" &&
     !resolver.serverUrl &&
@@ -55,7 +54,7 @@ const persistor = persistStore(store);
 export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
-    persistor.purge();
+    // persistor.purge();
     // return <TimeSetterModal isVisible={true} />;
     return (
       <Provider store={store}>
