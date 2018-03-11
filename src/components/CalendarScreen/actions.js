@@ -8,9 +8,9 @@ export default {
   },
   "CALENDAR_SCREEN/NEW_ACTIVITY_LOG": {
     type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
-    create: (activityId, selectedDateString) => ({
+    create: selectedDateString => ({
       type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
-      payload: { activityId, selectedDateString }
+      payload: { selectedDateString }
     })
   },
   "CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG": {
@@ -22,7 +22,7 @@ export default {
   },
   "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY": {
     type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY",
-    create: (activityId) => ({
+    create: activityId => ({
       type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY",
       payload: { activityId }
     })

@@ -38,7 +38,7 @@ const persistor = persistStore(store);
 export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
-    // persistor.purge();
+    persistor.purge();
     // return <TimeSetterModal isVisible={true} />;
     return (
       <Provider store={store}>

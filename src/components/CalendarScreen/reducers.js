@@ -6,7 +6,7 @@ import DateUtils from "../../utils/DateUtils";
 const initialState = {
   selectedDateString: DateUtils.toCalendarString(DateUtils.getDateString()),
   activitiesLog: [],
-  newStagingActivityLog: null,
+  newStagingActivityLog: null
 };
 
 const newActivityLog = activityId => ({
@@ -36,9 +36,10 @@ export default (state = initialState, action) => {
           ...state.activitiesLog,
           [action.payload.selectedDateString]: [
             ...(state.activitiesLog[action.payload.selectedDateString] || []),
-            newActivityLog(action.payload.activityId)
+            state.newStagingActivityLog
           ]
-        }
+        },
+        newStagingActivityLog: null
       };
     case actions["CALENDAR_SCREEN/DATE_SELECT"].type:
       return {

@@ -1,6 +1,10 @@
 import React from "react";
 import { WebView, View } from "react-native";
 
+const webComponent = require("./webComponent/index.html");
+
+console.log("webComponent: ", webComponent);
+
 export default class CircularSlider extends React.Component {
   render() {
     const {
@@ -16,7 +20,7 @@ export default class CircularSlider extends React.Component {
     } = this.props;
     return (
       <WebView
-        source={require("./webComponent/index.html")}
+        source={webComponent}
         onMessage={e => {
           const { payload: { state: { minValue, maxValue } } } = JSON.parse(
             e.nativeEvent.data
@@ -26,6 +30,7 @@ export default class CircularSlider extends React.Component {
             max: maxValue
           });
         }}
+        onShouldStartLoadWithRequest={() => true}
         injectedJavaScript={`
             window.radius = ${radius};
             window.maxValue = ${maxValue};
