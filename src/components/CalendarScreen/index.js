@@ -137,6 +137,15 @@ const CalendarScreen = ({
       </List>
     </Content>
     <TimeSetterModal
+      title={(() => {
+        const activeActivity = availableActivities.find(
+          ({ id }) =>
+            newStagingActivityLog
+              ? newStagingActivityLog.activityId === id
+              : false
+        );
+        return activeActivity ? activeActivity.title : "";
+      })()}
       minValueInitial={
         newStagingActivityLog &&
         Math.round((newStagingActivityLog.start - dayStart()) / 60)
