@@ -24,8 +24,8 @@ const DrawerView = ({ navigation, currentUser }) => (
         height: 200,
         justifyContent: "space-between",
         paddingTop: 30,
-        paddingLeft: 20,
-        paddingBottom: 10
+        paddingLeft: 25,
+        paddingBottom: 25
       }}
     >
       <Image
@@ -33,7 +33,7 @@ const DrawerView = ({ navigation, currentUser }) => (
         style={{ width: 80, height: 80, borderRadius: 50 }}
         source={{ uri: currentUser.photoURL }}
       />
-      <Text style={{ color: "white", fontSize: 25 }}>
+      <Text style={{ color: "white", fontSize: 23 }}>
         {currentUser.displayName}
       </Text>
     </LinearGradient>

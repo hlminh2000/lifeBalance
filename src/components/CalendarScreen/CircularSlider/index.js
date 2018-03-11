@@ -16,7 +16,7 @@ export default class CircularSlider extends React.Component {
     } = this.props;
     return (
       <WebView
-        source={require("./webComponent/index.html")}
+        source={{ uri: "file:///android_asset/webComponent/index.html" }}
         onMessage={e => {
           const { payload: { state: { minValue, maxValue } } } = JSON.parse(
             e.nativeEvent.data
@@ -26,6 +26,7 @@ export default class CircularSlider extends React.Component {
             max: maxValue
           });
         }}
+        onShouldStartLoadWithRequest={() => true}
         injectedJavaScript={`
             window.radius = ${radius};
             window.maxValue = ${maxValue};

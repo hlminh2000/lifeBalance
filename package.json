@@ -9,7 +9,8 @@
     "devMenu_a": "adb shell input keyevent 82",
     "react-native-vector-icons_setup": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json",
     "deploy_prop": "code-push release-react lifeBalance Android -d Production",
-    "deploy_stage": "code-push release-react lifeBalance Android -d Staging"
+    "deploy_stage": "code-push release-react lifeBalance Android -d Staging",
+    "react-native": "react-native"
   },
   "dependencies": {
     "appcenter": "^1.2.0",
@@ -24,9 +25,11 @@
     "react-native-android-checkbox": "^3.1.1",
     "react-native-calendars": "^1.16.1",
     "react-native-canvas": "^0.1.20",
+    "react-native-checkbox": "^2.0.0",
     "react-native-fab": "^1.0.6",
     "react-native-fbsdk": "^0.7.0",
     "react-native-firebase": "^3.2.4",
+    "react-native-fs": "^2.9.11",
     "react-native-google-signin": "^0.12.0",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-material-design": "^0.3.7",

@@ -17,6 +17,9 @@ import Modal from "react-native-modal";
 import CircularTimeRangeSelector from "../CircularTimeRangeSelector";
 
 export default ({
+  minValueInitial,
+  maxValueInitial,
+  onTimeRangeChange = () => {},
   onCancel = () => {},
   onComplete = () => {},
   title = "Some Activity",
@@ -39,7 +42,10 @@ export default ({
           </Body>
         </Left>
       </CardItem>
-      <CircularTimeRangeSelector />
+      <CircularTimeRangeSelector
+        onValueChange={onTimeRangeChange}
+        {...{ minValueInitial, maxValueInitial }}
+      />
       <CardItem>
         <Left />
         <Body />
