@@ -6,11 +6,18 @@ export default {
       payload: { dateString }
     })
   },
+  "CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE": {
+    type: "CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE",
+    create: ({ from, to }) => ({
+      type: "CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE",
+      payload: { from, to }
+    })
+  },
   "CALENDAR_SCREEN/NEW_ACTIVITY_LOG": {
     type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
-    create: (activityId, selectedDateString) => ({
+    create: selectedDateString => ({
       type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
-      payload: { activityId, selectedDateString }
+      payload: { selectedDateString }
     })
   },
   "CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG": {
@@ -18,6 +25,20 @@ export default {
     create: (activityId, selectedDateString) => ({
       type: "CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG",
       payload: { activityId, selectedDateString }
+    })
+  },
+  "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY": {
+    type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY",
+    create: activityId => ({
+      type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY",
+      payload: { activityId }
+    })
+  },
+  "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL": {
+    type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL",
+    create: () => ({
+      type: "CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL",
+      payload: {}
     })
   }
 };

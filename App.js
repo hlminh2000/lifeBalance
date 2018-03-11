@@ -14,6 +14,25 @@ import reducers from "./src/reducers.js";
 import RootDrawer from "./src/components/Navigations/Drawer/index.js";
 import STYLE from "./src/styleVariable";
 import AuthScreen from "./src/components/AuthScreen";
+import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
+import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
+import TimeSetterModal from "./src/components/CalendarScreen/TimeSetterModal";
+
+import { Platform } from "react-native";
+import { setCustomSourceTransformer } from "react-native/Libraries/Image/resolveAssetSource";
+
+setCustomSourceTransformer(function(resolver) {
+  if (
+    Platform.OS === "android" &&
+    !resolver.serverUrl &&
+    !resolver.bundlePath &&
+    resolver.asset.type === "html"
+  ) {
+    resolver.bundlePath = "/android_asset/";
+  }
+
+  return resolver.defaultAsset();
+});
 
 const persistConfig = {
   key: "root",
@@ -35,7 +54,8 @@ const persistor = persistStore(store);
 export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
-    // persistor.purge();
+    persistor.purge();
+    // return <TimeSetterModal isVisible={true} />;
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
