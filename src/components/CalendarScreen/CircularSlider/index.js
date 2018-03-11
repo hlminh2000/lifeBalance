@@ -1,10 +1,5 @@
 import React from "react";
 import { WebView, View } from "react-native";
-// import RNFS from "react-native-fs";
-
-const webComponent = require("./webComponent/index.html");
-
-// console.log("RNFS: ", RNFS);
 
 export default class CircularSlider extends React.Component {
   render() {
