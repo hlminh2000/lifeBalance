@@ -91,9 +91,11 @@ const CalendarScreen = ({
               icon
               key={id}
               onPress={e =>
-                isChecked
-                  ? onActivityUncheck(id, selectedDateString)
-                  : onActivityCheck(id, selectedDateString)
+                !isDisabled
+                  ? isChecked
+                    ? onActivityUncheck(id, selectedDateString)
+                    : onActivityCheck(id, selectedDateString)
+                  : null
               }
             >
               <Left>
