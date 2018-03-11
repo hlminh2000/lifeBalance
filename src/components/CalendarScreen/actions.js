@@ -6,6 +6,13 @@ export default {
       payload: { dateString }
     })
   },
+  "CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE": {
+    type: "CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE",
+    create: ({ from, to }) => ({
+      type: "CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE",
+      payload: { from, to }
+    })
+  },
   "CALENDAR_SCREEN/NEW_ACTIVITY_LOG": {
     type: "CALENDAR_SCREEN/NEW_ACTIVITY_LOG",
     create: selectedDateString => ({

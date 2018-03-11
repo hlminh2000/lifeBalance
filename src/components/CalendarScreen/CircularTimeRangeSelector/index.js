@@ -30,6 +30,7 @@ export default class CircularTimeRangeSlider extends Component {
   };
   render() {
     const { minValue: from, maxValue: to } = this.state;
+    const { onValueChange } = this.props;
     const radius = 250;
     const arcThickness = 70;
     const dimention = radius + arcThickness / 2;
@@ -88,10 +89,13 @@ export default class CircularTimeRangeSlider extends Component {
                 minValueInitial: this.state.minValue,
                 maxValueInitial: this.state.maxValue,
                 onValueChange: ({ min, max }) => {
-                  this.setState({
-                    minValue: min,
-                    maxValue: max
-                  });
+                  this.setState(
+                    {
+                      minValue: min,
+                      maxValue: max
+                    },
+                    () => onValueChange({ min, max })
+                  );
                 }
               }}
             />

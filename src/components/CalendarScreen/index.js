@@ -25,6 +25,7 @@ import HeaderBar from "../HeaderBar/index.js";
 import icons from "../icons";
 import DateUtils from "../../utils/DateUtils";
 import TimeSetterModal from "./TimeSetterModal";
+import moment from "moment";
 
 const CalendarScreen = ({
   day,
@@ -36,6 +37,9 @@ const CalendarScreen = ({
   isActivityActiveForDate = () => {},
   onNewActivityCancel = () => {},
   onNewActivityTimeSet = () => {},
+  onTimeRangeChange = range => {
+    console.log(range);
+  },
   newStagingActivityLog,
   onDaySelect,
   activitiesLog
@@ -131,12 +135,19 @@ const CalendarScreen = ({
       </List>
     </Content>
     <TimeSetterModal
+      onTimeRangeChange={onTimeRangeChange}
       onCancel={onNewActivityCancel}
       onComplete={() => onNewActivityTimeSet(selectedDateString)}
       isVisible={!!newStagingActivityLog}
     />
   </Container>
 );
+
+const toUnix = interdayMinutes =>
+  moment()
+    .startOf("day")
+    .unix() +
+  interdayMinutes * 60;
 
 export default connect(
   ({
@@ -149,21 +160,24 @@ export default connect(
     newStagingActivityLog
   }),
   dispatch => ({
-    onActivityUncheck: (activityId, selectedDateString) => {
-      console.log(activityId);
-      return dispatch(
+    onTimeRangeChange: ({ min, max }) =>
+      dispatch(
+        actions["CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE"].create({
+          from: toUnix(min),
+          to: toUnix(max)
+        })
+      ),
+    onActivityUncheck: (activityId, selectedDateString) =>
+      dispatch(
         actions["CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG"].create(
           activityId,
           selectedDateString
         )
-      );
-    },
-    onActivityCheck: (activityId, selectedDateString) => {
-      console.log(activityId);
-      return dispatch(
+      ),
+    onActivityCheck: (activityId, selectedDateString) =>
+      dispatch(
         actions["CALENDAR_SCREEN/NEW_STAGING_ACTIVITY"].create(activityId)
-      );
-    },
+      ),
     onNewActivityCancel: () =>
       dispatch(actions["CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL"].create()),
     onNewActivityTimeSet: selectedDateString =>

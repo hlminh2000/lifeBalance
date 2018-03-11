@@ -19,6 +19,15 @@ const newActivityLog = activityId => ({
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case actions["CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE"].type:
+      return {
+        ...state,
+        newStagingActivityLog: {
+          ...state.newStagingActivityLog,
+          start: action.payload.from,
+          end: action.payload.to
+        }
+      };
     case actions["CALENDAR_SCREEN/NEW_STAGING_ACTIVITY_CANCEL"].type:
       return {
         ...state,
