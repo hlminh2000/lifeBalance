@@ -134,28 +134,20 @@ const CalendarScreen = ({
         })}
       </List>
     </Content>
-    {!!newStagingActivityLog &&
-      (() => {
-        console.log(
-          "newStagingActivityLog.start: ",
-          newStagingActivityLog.start
-        );
-        console.log("dayStart: ", dayStart());
-        return (
-          <TimeSetterModal
-            minValueInitial={Math.round(
-              (newStagingActivityLog.start - dayStart()) / 60
-            )}
-            maxValueInitial={Math.round(
-              (newStagingActivityLog.end - dayStart()) / 60
-            )}
-            onTimeRangeChange={onTimeRangeChange}
-            onCancel={onNewActivityCancel}
-            onComplete={() => onNewActivityTimeSet(selectedDateString)}
-            isVisible={true}
-          />
-        );
-      })()}
+    <TimeSetterModal
+      minValueInitial={
+        newStagingActivityLog &&
+        Math.round((newStagingActivityLog.start - dayStart()) / 60)
+      }
+      maxValueInitial={
+        newStagingActivityLog &&
+        Math.round((newStagingActivityLog.end - dayStart()) / 60)
+      }
+      onTimeRangeChange={onTimeRangeChange}
+      onCancel={onNewActivityCancel}
+      onComplete={() => onNewActivityTimeSet(selectedDateString)}
+      isVisible={!!newStagingActivityLog}
+    />
   </Container>
 );
 
