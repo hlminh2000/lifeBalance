@@ -18,6 +18,23 @@ import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index
 import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
 import TimeSetterModal from "./src/components/CalendarScreen/TimeSetterModal";
 
+import { Platform } from "react-native";
+import { setCustomSourceTransformer } from "react-native/Libraries/Image/resolveAssetSource";
+
+setCustomSourceTransformer(function(resolver) {
+  console.log(resolver);
+  if (
+    Platform.OS === "android" &&
+    !resolver.serverUrl &&
+    !resolver.bundlePath &&
+    resolver.asset.type === "html"
+  ) {
+    resolver.bundlePath = "/android_asset/";
+  }
+
+  return resolver.defaultAsset();
+});
+
 const persistConfig = {
   key: "root",
   storage: storage,

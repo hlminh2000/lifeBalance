@@ -1,9 +1,10 @@
 import React from "react";
 import { WebView, View } from "react-native";
+// import RNFS from "react-native-fs";
 
 const webComponent = require("./webComponent/index.html");
 
-console.log("webComponent: ", webComponent);
+// console.log("RNFS: ", RNFS);
 
 export default class CircularSlider extends React.Component {
   render() {
@@ -20,7 +21,7 @@ export default class CircularSlider extends React.Component {
     } = this.props;
     return (
       <WebView
-        source={webComponent}
+        source={{ uri: "file:///android_asset/webComponent/index.html" }}
         onMessage={e => {
           const { payload: { state: { minValue, maxValue } } } = JSON.parse(
             e.nativeEvent.data
