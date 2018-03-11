@@ -111,7 +111,7 @@ const CalendarScreen = ({
               </Body>
               <Right style={{ position: "relative" }}>
                 <View style={{ position: "relative" }}>
-                  <CheckBox disabled={isDisabled} value={isChecked} />
+                  <CheckBox value={isChecked} />
                   <View
                     style={{
                       position: "absolute",
