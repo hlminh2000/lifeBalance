@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, CheckBox, TouchableHighlight } from "react-native";
-import State from "../State.js";
-import actions from "./actions";
+import moment from "moment";
+import { debounce } from "lodash";
 import {
   Container,
   Header,
@@ -21,11 +21,13 @@ import {
   // CheckBox
 } from "native-base";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+
+import State from "../State.js";
+import actions from "./actions";
 import HeaderBar from "../HeaderBar/index.js";
 import icons from "../icons";
 import DateUtils from "../../utils/DateUtils";
 import TimeSetterModal from "./TimeSetterModal";
-import moment from "moment";
 
 const CalendarScreen = ({
   day,
@@ -143,7 +145,7 @@ const CalendarScreen = ({
         newStagingActivityLog &&
         Math.round((newStagingActivityLog.end - dayStart()) / 60)
       }
-      onTimeRangeChange={onTimeRangeChange}
+      onTimeRangeChange={debounce(onTimeRangeChange, 100)}
       onCancel={onNewActivityCancel}
       onComplete={() => onNewActivityTimeSet(selectedDateString)}
       isVisible={!!newStagingActivityLog}
