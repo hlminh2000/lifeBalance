@@ -145,7 +145,7 @@ const CalendarScreen = ({
         newStagingActivityLog &&
         Math.round((newStagingActivityLog.end - dayStart()) / 60)
       }
-      onTimeRangeChange={debounce(onTimeRangeChange, 100)}
+      onTimeRangeChange={debounce(onTimeRangeChange, 10)}
       onCancel={onNewActivityCancel}
       onComplete={() => onNewActivityTimeSet(selectedDateString)}
       isVisible={!!newStagingActivityLog}
