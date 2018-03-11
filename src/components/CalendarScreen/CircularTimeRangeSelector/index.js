@@ -4,10 +4,13 @@ import CircularSlider from "../CircularSlider";
 import style from "../../../styleVariable";
 
 export default class CircularTimeRangeSlider extends Component {
-  state = {
-    minValue: 540,
-    maxValue: 1020
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      minValue: props.minValueInitial || 540,
+      maxValue: props.maxValueInitial || 1020
+    };
+  }
   getDeltaTime = () => {
     const { maxValue, minValue } = this.state;
     const minutesPerDay = 24 * 60;

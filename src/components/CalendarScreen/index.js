@@ -134,20 +134,37 @@ const CalendarScreen = ({
         })}
       </List>
     </Content>
-    <TimeSetterModal
-      onTimeRangeChange={onTimeRangeChange}
-      onCancel={onNewActivityCancel}
-      onComplete={() => onNewActivityTimeSet(selectedDateString)}
-      isVisible={!!newStagingActivityLog}
-    />
+    {!!newStagingActivityLog &&
+      (() => {
+        console.log(
+          "newStagingActivityLog.start: ",
+          newStagingActivityLog.start
+        );
+        console.log("dayStart: ", dayStart());
+        return (
+          <TimeSetterModal
+            minValueInitial={Math.round(
+              (newStagingActivityLog.start - dayStart()) / 60
+            )}
+            maxValueInitial={Math.round(
+              (newStagingActivityLog.end - dayStart()) / 60
+            )}
+            onTimeRangeChange={onTimeRangeChange}
+            onCancel={onNewActivityCancel}
+            onComplete={() => onNewActivityTimeSet(selectedDateString)}
+            isVisible={true}
+          />
+        );
+      })()}
   </Container>
 );
 
-const toUnix = interdayMinutes =>
+const dayStart = () =>
   moment()
     .startOf("day")
-    .unix() +
-  interdayMinutes * 60;
+    .unix();
+
+const toUnix = interdayMinutes => dayStart() + interdayMinutes * 60;
 
 export default connect(
   ({
