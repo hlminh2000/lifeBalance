@@ -41,6 +41,12 @@ export default async () => {
 
     console.log("currentUser: ", currentUser);
 
+    // console.log("current user: ", firebase.auth().currentUser);
+    firebase
+      .auth()
+      .currentUser.getIdToken()
+      .then(data => console.log("idToken: ", data));
+
     return currentUser;
   } catch (e) {
     console.error(e);
