@@ -7,6 +7,7 @@ import auth from "../../utils/auth";
 import actions from "./actions";
 import LinearGradient from "react-native-linear-gradient";
 import STYLE from "../../styleVariable";
+import { fetchAllUserData } from "../../utils/api";
 
 const facebookLogin = async () => {
   const user = await auth.facebookLogin();
@@ -31,7 +32,14 @@ export default connect(
   }),
   dispatch => ({
     onLoginComplete: user =>
-      dispatch(actions["AUTH/LOGIN_COMPLETE"].create(user))
+      auth
+        .getCurrentUser()
+        .getIdToken()
+        .then(idToken => fetchAllUserData({ idToken }))
+        .then(data => {
+          console.log("data: ", data);
+          dispatch(actions["AUTH/LOGIN_COMPLETE"].create(user));
+        })
   })
 )(
   ({
