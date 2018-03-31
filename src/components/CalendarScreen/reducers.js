@@ -1,4 +1,5 @@
 import DateUtil from "../../utils/DateUtils";
+import authActions from "../AuthScreen/actions";
 import actions from "./actions";
 import moment from "moment";
 import DateUtils from "../../utils/DateUtils";
@@ -19,6 +20,10 @@ const newActivityLog = activityId => ({
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case authActions["AUTH/LOGIN_COMPLETE"].type:
+      return {
+        ...state
+      };
     case actions["CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE"].type:
       return {
         ...state,

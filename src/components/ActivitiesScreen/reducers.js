@@ -1,4 +1,5 @@
 import actions from "./actions.js";
+import authActions from "../AuthScreen/actions";
 
 const initialState = {
   activityList: [],
@@ -21,6 +22,10 @@ const newActivity = () => {
 export default (state = initialState, action) => {
   const output = (() => {
     switch (action.type) {
+      case authActions["AUTH/LOGIN_COMPLETE"].type:
+        return {
+          ...state
+        };
       case actions["ACTIVITIES_SCREEN/STAGE_NEW_ACTIVITY"].type:
         return {
           ...state,
