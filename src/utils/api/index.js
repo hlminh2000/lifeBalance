@@ -17,7 +17,9 @@ const fetchGqlData = ({
       query,
       variables
     })
-  }).then(res => res.json());
+  })
+    .then(res => res.json())
+    .then(json => Promise.resolve(json.data));
 
 export const fetchAllUserData = ({ idToken = "" } = {}) =>
   fetchGqlData({

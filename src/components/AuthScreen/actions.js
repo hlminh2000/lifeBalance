@@ -1,9 +1,9 @@
 export default {
   "AUTH/LOGIN_COMPLETE": {
     type: "AUTH/LOGIN_COMPLETE",
-    create: user => ({
+    create: ({ user, userData }) => ({
       type: "AUTH/LOGIN_COMPLETE",
-      payload: { user }
+      payload: { user, userData }
     })
   }
 };

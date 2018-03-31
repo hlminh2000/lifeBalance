@@ -36,9 +36,8 @@ export default connect(
         .getCurrentUser()
         .getIdToken()
         .then(idToken => fetchAllUserData({ idToken }))
-        .then(data => {
-          console.log("data: ", data);
-          dispatch(actions["AUTH/LOGIN_COMPLETE"].create(user));
+        .then(userData => {
+          dispatch(actions["AUTH/LOGIN_COMPLETE"].create({ user, userData }));
         })
   })
 )(
