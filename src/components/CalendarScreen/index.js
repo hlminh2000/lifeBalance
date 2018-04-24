@@ -28,6 +28,7 @@ import HeaderBar from "../HeaderBar/index.js";
 import icons from "../icons";
 import DateUtils from "../../utils/DateUtils";
 import TimeSetterModal from "./TimeSetterModal";
+import Day from "./DayComponent";
 
 const CalendarScreen = ({
   day,
@@ -60,23 +61,7 @@ const CalendarScreen = ({
       onDayPress={day => {
         onDaySelect(day.dateString);
       }}
-      dayComponent={
-        null
-        //   ({ date, state }) => {
-        //   return (
-        //     <View style={{ flex: 1 }}>
-        //       <Text
-        //         style={{
-        //           textAlign: "center",
-        //           color: state === "disabled" ? "gray" : "black"
-        //         }}
-        //       >
-        //         {date.day}
-        //       </Text>
-        //     </View>
-        //   );
-        // }
-      }
+      dayComponent={props => <Day {...{ ...props, activitiesLog }} />}
     />
     <Content>
       <List>
