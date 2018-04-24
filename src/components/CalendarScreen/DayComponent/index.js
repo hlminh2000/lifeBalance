@@ -81,6 +81,9 @@ const styleConstructor = (theme = {}) => {
     disabledText: {
       color: appStyle.textDisabledColor
     },
+    selectedText: {
+      color: "#ffffff"
+    },
     ...(theme[STYLESHEET_ID] || {})
   });
 };
@@ -150,8 +153,6 @@ class Day extends Component {
     let containerStyle = [this.style.base];
     let textStyle = [this.style.text];
 
-    console.log("activitiesLog: ", activitiesLog);
-
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
       marking = {
@@ -165,6 +166,7 @@ class Day extends Component {
 
     if (marking.selected) {
       containerStyle.push(this.style.selected);
+      textStyle.push(this.style.selectedText);
     } else if (isDisabled) {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === "today") {
