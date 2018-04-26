@@ -1,13 +1,19 @@
 import React, { Component } from "react";
-import { TouchableOpacity, Text, StyleSheet, Platform } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  Platform
+} from "react-native";
 import PropTypes from "prop-types";
+import icons from "../../icons";
 
 const STYLESHEET_ID = "stylesheet.day.single";
 
 const foregroundColor = "#ffffff";
 const textLinkColor = "#00adf5";
 const textDefaultColor = "#2d4150";
-
 const defaultStyle = {
   foregroundColor,
   backgroundColor: "#f4f4f4",
@@ -149,9 +155,11 @@ class Day extends Component {
   }
 
   render() {
-    const { activitiesLog } = this.props;
+    const { activitiesLog, activityList, date: { dateString } } = this.props;
     let containerStyle = [this.style.base];
     let textStyle = [this.style.text];
+
+    const thisLogs = activitiesLog[dateString] || [];
 
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
@@ -197,6 +205,36 @@ class Day extends Component {
         <Text allowFontScaling={false} style={textStyle}>
           {String(this.props.children)}
         </Text>
+        <View
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "flex-end"
+            // backgroundColor: "#ff00ff"
+          }}
+        >
+          {thisLogs
+            .map(
+              ({ activityId }) =>
+                activityList.find(({ id }) => activityId === id).icon
+            )
+            .map(iconName => icons[iconName])
+            .map((icon, i) =>
+              icon({
+                key: i,
+                style: {
+                  opacity: 1,
+                  fontSize: 9,
+                  color: "#rgba(0,0,0,1)"
+                }
+              })
+            )}
+        </View>
       </TouchableOpacity>
     );
   }

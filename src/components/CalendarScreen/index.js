@@ -33,7 +33,7 @@ import Day from "./DayComponent";
 const CalendarScreen = ({
   day,
   navigation,
-  availableActivities,
+  activityList,
   onActivityCheck,
   onActivityUncheck,
   selectedDateString,
@@ -61,11 +61,13 @@ const CalendarScreen = ({
       onDayPress={day => {
         onDaySelect(day.dateString);
       }}
-      dayComponent={props => <Day {...{ ...props, activitiesLog }} />}
+      dayComponent={props => (
+        <Day {...{ ...props, activitiesLog, activityList }} />
+      )}
     />
     <Content>
       <List>
-        {availableActivities.map(({ id, icon, title }) => {
+        {activityList.map(({ id, icon, title }) => {
           const isChecked = (activitiesLog[selectedDateString] || []).some(
             log =>
               log.activityId === id &&
@@ -123,7 +125,7 @@ const CalendarScreen = ({
     </Content>
     <TimeSetterModal
       title={(() => {
-        const activeActivity = availableActivities.find(
+        const activeActivity = activityList.find(
           ({ id }) =>
             newStagingActivityLog
               ? newStagingActivityLog.activityId === id
@@ -159,7 +161,7 @@ export default connect(
     activitiesScreen: { activityList },
     calendarScreen: { selectedDateString, activitiesLog, newStagingActivityLog }
   }) => ({
-    availableActivities: activityList,
+    activityList,
     selectedDateString,
     activitiesLog,
     newStagingActivityLog
