@@ -229,8 +229,7 @@ class Day extends Component {
                 key: i,
                 style: {
                   opacity: 1,
-                  fontSize: 9,
-                  color: "#rgba(0,0,0,1)"
+                  fontSize: 9
                 }
               })
             )}
