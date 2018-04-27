@@ -21,6 +21,7 @@
     "node-emoji": "^1.8.1",
     "pixi.js": "^4.7.0",
     "react": "16.2.0",
+    "react-component-component": "^1.2.1",
     "react-native": "0.52.0",
     "react-native-android-checkbox": "^3.1.1",
     "react-native-calendars": "^1.16.1",
@@ -39,6 +40,7 @@
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.27",
     "react-redux": "^5.0.6",
+    "recompose": "^0.27.0",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-persist": "^5.6.8"

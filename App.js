@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { StatusBar } from "react-native";
+import { Platform, StatusBar } from "react-native";
 import { StyleProvider } from "native-base";
 import { Provider, connect } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/lib/integration/react";
+import { setCustomSourceTransformer } from "react-native/Libraries/Image/resolveAssetSource";
 import storage from "redux-persist/lib/storage";
 
 import getTheme from "./native-base-theme/components";
@@ -17,9 +18,8 @@ import AuthScreen from "./src/components/AuthScreen";
 import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
 import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
 import TimeSetterModal from "./src/components/CalendarScreen/TimeSetterModal";
-
-import { Platform } from "react-native";
-import { setCustomSourceTransformer } from "react-native/Libraries/Image/resolveAssetSource";
+import { withQuery } from "./src/utils/api";
+import { compose } from "recompose";
 
 setCustomSourceTransformer(function(resolver) {
   if (
@@ -66,7 +66,20 @@ export default class App extends Component<{}> {
                 barStyle="light-content"
               />
               <AuthScreen
-                successRender={({ ...props }) => <RootDrawer {...props} />}
+                successRender={({ ...props }) =>
+                  (() => {
+                    const LinkedNavigation = compose(
+                      withQuery({
+                        query: `
+
+                        `
+                      })
+                    )(({ data, loading }) => {
+                      return <RootDrawer {...{ ...props, data, loading }} />;
+                    });
+                    return <LinkedNavigation />;
+                  })()
+                }
               />
             </React.Fragment>
           </StyleProvider>
