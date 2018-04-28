@@ -77,16 +77,14 @@ export default class App extends Component<{}> {
                 barStyle="light-content"
               />
               <AuthScreen
-                successRender={({ user, ...props }) =>
-                  (() => {
-                    const LinkedNavigation = withQueryFactory({ user })(
-                      ({ data: { user } = {}, loading }) => (
-                        <MainNavigation {...{ ...props, user, loading }} />
-                      )
-                    );
-                    return <LinkedNavigation />;
-                  })()
-                }
+                successRender={({ user, ...props }) => {
+                  const LinkedNavigation = withQueryFactory({ user })(
+                    ({ data: { user } = {}, loading }) => (
+                      <MainNavigation {...{ ...props, user, loading }} />
+                    )
+                  );
+                  return <LinkedNavigation />;
+                }}
               />
             </React.Fragment>
           </StyleProvider>
