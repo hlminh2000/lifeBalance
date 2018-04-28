@@ -13,15 +13,15 @@ import storage from "redux-persist/lib/storage";
 import getTheme from "./native-base-theme/components";
 import platform from "./native-base-theme/variables/platform";
 import reducers from "./src/reducers.js";
-import RootDrawer from "./src/components/Navigations/Drawer/index.js";
+import {
+  withQueryFactory,
+  MainNavigation
+} from "./src/components/Navigations/Drawer/index.js";
 import STYLE from "./src/styleVariable";
 import AuthScreen from "./src/components/AuthScreen";
 import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
 import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
 import TimeSetterModal from "./src/components/CalendarScreen/TimeSetterModal";
-import { withQuery } from "./src/utils/api";
-import { getUserToken } from "./src/utils/auth";
-import { ALL_USER_DATA } from "./src/utils/api/queries";
 
 setCustomSourceTransformer(function(resolver) {
   if (
@@ -52,15 +52,6 @@ const store = createStore(
 );
 
 const persistor = persistStore(store);
-
-const withQueryFactory = ({ user }) =>
-  withQuery({
-    query: user.getIdToken().then(idToken => ALL_USER_DATA({ idToken }))
-  });
-
-const MainNavigation = ({ user, loading, ...props }) => {
-  return <RootDrawer {...{ ...props, user, loading }} />;
-};
 
 export default class App extends Component<{}> {
   componentDidMount() {}
