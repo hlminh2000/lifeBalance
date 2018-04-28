@@ -79,11 +79,11 @@ export default class App extends Component<{}> {
               <AuthScreen
                 successRender={({ user, ...props }) =>
                   (() => {
-                    const LinkedNavigation = compose(
-                      withQueryFactory({ user })
-                    )(({ data: { user } = {}, loading }) => (
-                      <MainNavigation {...{ ...props, user, loading }} />
-                    ));
+                    const LinkedNavigation = withQueryFactory({ user })(
+                      ({ data: { user } = {}, loading }) => (
+                        <MainNavigation {...{ ...props, user, loading }} />
+                      )
+                    );
                     return <LinkedNavigation />;
                   })()
                 }
