@@ -53,9 +53,14 @@ const store = createStore(
 
 const persistor = persistStore(store);
 
-const MainNavigation = ({ user, loading, ...props }) => (
-  <RootDrawer {...{ ...props, user, loading }} />
-);
+const withQueryFactory = ({ user }) =>
+  withQuery({
+    query: user.getIdToken().then(idToken => ALL_USER_DATA({ idToken }))
+  });
+
+const MainNavigation = ({ user, loading, ...props }) => {
+  return <RootDrawer {...{ ...props, user, loading }} />;
+};
 
 export default class App extends Component<{}> {
   componentDidMount() {}
@@ -75,17 +80,10 @@ export default class App extends Component<{}> {
                 successRender={({ user, ...props }) =>
                   (() => {
                     const LinkedNavigation = compose(
-                      withQuery({
-                        query: user
-                          .getIdToken()
-                          .then(idToken => ALL_USER_DATA({ idToken }))
-                      })
-                    )(({ data: { user }, loading }) => {
-                      console.log("user: ", user);
-                      return (
-                        <MainNavigation {...{ ...props, user, loading }} />
-                      );
-                    });
+                      withQueryFactory({ user })
+                    )(({ data: { user } = {}, loading }) => (
+                      <MainNavigation {...{ ...props, user, loading }} />
+                    ));
                     return <LinkedNavigation />;
                   })()
                 }
