@@ -31,11 +31,17 @@ export const withQuery = ({
   <Component
     initialState={{ loading: true }}
     didMount={({ setState }) =>
-      fetchGqlData({
-        query,
-        variables,
-        headers
-      }).then(data => setState({ data, loading: false }))
+      Promise.all(
+        [query, variables, headers].map(thing => Promise.resolve(thing))
+      )
+        .then(([query, variables, headers]) =>
+          fetchGqlData({
+            query,
+            variables,
+            headers
+          })
+        )
+        .then(data => setState({ data, loading: false }))
     }
   >
     {({ state: { data, loading }, setState }) => (

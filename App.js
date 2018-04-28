@@ -7,6 +7,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import { setCustomSourceTransformer } from "react-native/Libraries/Image/resolveAssetSource";
+import { compose } from "recompose";
 import storage from "redux-persist/lib/storage";
 
 import getTheme from "./native-base-theme/components";
@@ -19,7 +20,8 @@ import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index
 import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
 import TimeSetterModal from "./src/components/CalendarScreen/TimeSetterModal";
 import { withQuery } from "./src/utils/api";
-import { compose } from "recompose";
+import { getUserToken } from "./src/utils/auth";
+import { ALL_USER_DATA } from "./src/utils/api/queries";
 
 setCustomSourceTransformer(function(resolver) {
   if (
@@ -51,6 +53,10 @@ const store = createStore(
 
 const persistor = persistStore(store);
 
+const MainNavigation = ({ user, loading, ...props }) => (
+  <RootDrawer {...{ ...props, user, loading }} />
+);
+
 export default class App extends Component<{}> {
   componentDidMount() {}
   render() {
@@ -66,16 +72,19 @@ export default class App extends Component<{}> {
                 barStyle="light-content"
               />
               <AuthScreen
-                successRender={({ ...props }) =>
+                successRender={({ user, ...props }) =>
                   (() => {
                     const LinkedNavigation = compose(
                       withQuery({
-                        query: `
-
-                        `
+                        query: user
+                          .getIdToken()
+                          .then(idToken => ALL_USER_DATA({ idToken }))
                       })
-                    )(({ data, loading }) => {
-                      return <RootDrawer {...{ ...props, data, loading }} />;
+                    )(({ data: { user }, loading }) => {
+                      console.log("user: ", user);
+                      return (
+                        <MainNavigation {...{ ...props, user, loading }} />
+                      );
                     });
                     return <LinkedNavigation />;
                   })()

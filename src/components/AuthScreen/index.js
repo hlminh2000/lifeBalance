@@ -48,7 +48,7 @@ export default connect(
   }) => (
     <React.Fragment>
       {auth.getCurrentUser() ? (
-        successRender()
+        successRender({ user: auth.getCurrentUser() })
       ) : (
         <LinearGradient
           colors={[STYLE.COLOR_PRIMARY, STYLE.COLOR_SECONDARY]}
