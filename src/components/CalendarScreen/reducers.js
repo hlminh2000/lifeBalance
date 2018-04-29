@@ -27,13 +27,10 @@ export default (state = initialState, { type, payload }) => {
       };
     case "ONLINE_USER_RESTORE":
       const { user: { activities, activityLogs } } = payload;
+      const activitiesLog = groupBy(activityLogs, "date");
       return {
         ...state,
-        activitiesLog: groupBy(activityLogs, ({ timestamp }) =>
-          moment(timestamp)
-            .startOf("day")
-            .toString()
-        )
+        activitiesLog
       };
     case actions["CALENDAR_SCREEN/STAGING_ACTIVITY_TIME_CHANGE"].type:
       return {

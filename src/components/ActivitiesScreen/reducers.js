@@ -26,7 +26,10 @@ export default (state = initialState, { type, payload }) => {
         const { user: { activities, activityLogs } } = payload;
         return {
           ...state,
-          activityList: activities
+          activityList: activities.map(({ icon, ...rest }) => ({
+            ...rest,
+            icon: icon || "DEFAULT"
+          }))
         };
       case authActions["AUTH/LOGIN_COMPLETE"].type:
         return {
