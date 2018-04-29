@@ -19,9 +19,15 @@ const newActivity = () => {
   };
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, { type, payload }) => {
   const output = (() => {
-    switch (action.type) {
+    switch (type) {
+      case "ONLINE_USER_RESTORE":
+        const { user: { activities, activityLogs } } = payload;
+        return {
+          ...state,
+          activityList: activities
+        };
       case authActions["AUTH/LOGIN_COMPLETE"].type:
         return {
           ...state
@@ -36,7 +42,7 @@ export default (state = initialState, action) => {
           ...state,
           newStagingActivity: {
             ...state.newStagingActivity,
-            title: action.payload.text
+            title: payload.text
           }
         };
       case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_ICON_SELECT"].type:
@@ -44,7 +50,7 @@ export default (state = initialState, action) => {
           ...state,
           newStagingActivity: {
             ...state.newStagingActivity,
-            icon: action.payload.iconName
+            icon: payload.iconName
           }
         };
       case actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE"].type:
@@ -62,7 +68,7 @@ export default (state = initialState, action) => {
         return {
           ...state,
           activityList: state.activityList.filter(
-            activity => activity.id != action.payload.activityId
+            activity => activity.id != payload.activityId
           )
         };
       default:

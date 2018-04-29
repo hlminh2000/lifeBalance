@@ -42,10 +42,11 @@ export const withQuery = ({
           })
         )
         .then(data => setState({ data, loading: false }))
+        .catch(httpError => setState({ httpError, loading: false }))
     }
   >
-    {({ state: { data, loading }, setState }) => (
-      <WrappedComponent {...{ data, loading, ...props }} />
+    {({ state: { data = {}, error, loading }, httpError, setState }) => (
+      <WrappedComponent {...{ data, error, httpError, loading, ...props }} />
     )}
   </Component>
 );

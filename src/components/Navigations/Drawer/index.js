@@ -4,6 +4,8 @@ import { StyleSheet, View } from "react-native";
 import { DrawerNavigator } from "react-navigation";
 import { connect } from "react-redux";
 import { Text, List, ListItem } from "native-base";
+import { Bubbles, DoubleBounce, Bars, Pulse } from "react-native-loader";
+import { compose } from "recompose";
 
 import ActivitiesScreen from "../../ActivitiesScreen/index.js";
 import CalendarScreen from "../../CalendarScreen/index.js";
@@ -14,6 +16,7 @@ import DrawerComponent from "./DrawerComponent";
 import { withQuery } from "../../../utils/api";
 import { getUserToken } from "../../../utils/auth";
 import { ALL_USER_DATA } from "../../../utils/api/queries";
+import { COLOR_PRIMARY } from "../../../styleVariable";
 
 const { height, width } = Dimensions.get("window");
 
@@ -36,11 +39,59 @@ const RootDrawer = DrawerNavigator(
 
 export const withQueryFactory = ({ user }) =>
   withQuery({
-    query: user.getIdToken().then(idToken => ALL_USER_DATA({ idToken }))
+    query: user
+      .getIdToken()
+      .then(idToken => ALL_USER_DATA({ idToken: `${idToken}` }))
   });
 
-export const MainNavigation = ({ user, loading, ...props }) => {
-  return <RootDrawer {...{ ...props, user, loading }} />;
-};
+export const MainNavigation = compose(
+  connect(
+    state => ({}),
+    dispatch => ({
+      restoreUserData: ({ user } = {}) =>
+        dispatch({
+          type: "ONLINE_USER_RESTORE",
+          payload: {
+            user
+          }
+        })
+    })
+  )
+)(
+  ({
+    data: { user },
+    error,
+    httpError,
+    loading,
+    restoreUserData,
+    ...props
+  }) => {
+    console.log("user: ", user);
+    console.log("error: ", error);
+    console.log("httpError: ", httpError);
+    if (!loading && user) {
+      restoreUserData({ user });
+    }
+    return loading ? (
+      <View
+        style={{
+          backgroundColor: "#ffffff",
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <DoubleBounce size={30} color={COLOR_PRIMARY} />
+      </View>
+    ) : (
+      <RootDrawer {...{ ...props, user, loading }} />
+    );
+  }
+);
 
 export default RootDrawer;

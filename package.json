@@ -33,6 +33,7 @@
     "react-native-fs": "^2.9.11",
     "react-native-google-signin": "^0.12.0",
     "react-native-linear-gradient": "^2.4.0",
+    "react-native-loader": "^1.2.1",
     "react-native-material-design": "^0.3.7",
     "react-native-modal": "^4.1.1",
     "react-native-push-notification": "^3.0.2",
