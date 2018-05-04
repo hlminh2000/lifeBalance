@@ -1,6 +1,7 @@
-export const ALL_USER_DATA = ({ idToken }) => `
+export const allUserDataQuery = ({ idToken }) => `
   {
     user(idToken:"${idToken}"){
+      clientTimestamp
       uid
       allActivityIds
       allActiveDates

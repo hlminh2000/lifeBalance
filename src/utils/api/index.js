@@ -1,8 +1,9 @@
 import React from "react";
 import Component from "react-component-component";
-import { ALL_USER_DATA } from "./queries";
-const GRAPHQL_BASE =
-  "https://us-central1-lifebalance-e467a.cloudfunctions.net/api/graphql";
+import { allUserDataQuery } from "./queries";
+const GRAPHQL_BASE = "http://192.168.100.108:3000/graphql";
+// const GRAPHQL_BASE =
+//   "https://us-central1-lifebalance-e467a.cloudfunctions.net/api/graphql";
 
 const alwaysSendHeaders = { "Content-Type": "application/json" };
 
@@ -53,5 +54,5 @@ export const withQuery = ({
 
 export const fetchAllUserData = ({ idToken = "" } = {}) =>
   fetchGqlData({
-    query: ALL_USER_DATA({ idToken })
+    query: allUserDataQuery({ idToken })
   });

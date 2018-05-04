@@ -15,7 +15,7 @@ import auth from "../../../utils/auth";
 import DrawerComponent from "./DrawerComponent";
 import { withQuery } from "../../../utils/api";
 import { getUserToken } from "../../../utils/auth";
-import { ALL_USER_DATA } from "../../../utils/api/queries";
+import { allUserDataQuery } from "../../../utils/api/queries";
 import { COLOR_PRIMARY } from "../../../styleVariable";
 
 const { height, width } = Dimensions.get("window");
@@ -41,7 +41,7 @@ export const withQueryFactory = ({ user }) =>
   withQuery({
     query: user
       .getIdToken()
-      .then(idToken => ALL_USER_DATA({ idToken: `${idToken}` }))
+      .then(idToken => allUserDataQuery({ idToken: `${idToken}` }))
   });
 
 export const MainNavigation = compose(
