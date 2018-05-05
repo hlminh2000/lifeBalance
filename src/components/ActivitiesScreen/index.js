@@ -23,6 +23,8 @@ import Modal from "react-native-modal";
 import ActivityItemList from "./ActivityItemList/index.js";
 import STYLE from "../../styleVariable";
 import ActivityEditModal from "./ActivityEditModal";
+import { fetchGqlData } from "../../utils/api";
+import { updateUserActivities } from "../../utils/api/queries";
 
 const ActivitiesScreen = ({
   activities,
@@ -60,7 +62,8 @@ export default connect(
   state => ({
     activities: state.activitiesScreen.activityList,
     editingActivityId: state.activitiesScreen.currentEditingActivityId,
-    newStagingActivity: state.activitiesScreen.newStagingActivity
+    newStagingActivity: state.activitiesScreen.newStagingActivity,
+    lastModified: state.lastModified
   }),
   dispatch => ({
     onFabTapped: activity =>
@@ -69,7 +72,7 @@ export default connect(
       dispatch(
         actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_TITLE_CHANGE"].create(newText)
       ),
-    onNewActivityComplete: () =>
+    registerNewActivity: () =>
       dispatch(actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE"].create()),
     onNewActivityCancel: () =>
       dispatch(actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL"].create()),
@@ -79,5 +82,26 @@ export default connect(
       dispatch(
         actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_ICON_SELECT"].create(iconName)
       )
+  }),
+  (propsFromState, propsFromDispatch, ownProps) => ({
+    ...ownProps,
+    ...propsFromState,
+    ...propsFromDispatch,
+    onNewActivityComplete: () => {
+      propsFromDispatch.registerNewActivity();
+      // getUserToken().then(idToken =>
+      const query = updateUserActivities({
+        // idToken,
+        clientTimestamp: Date.now(),
+        activitiesSet: [
+          propsFromState.activities,
+          propsFromState.newStagingActivity
+        ]
+      });
+      fetchGqlData({
+        query
+      });
+      // );
+    }
   })
 )(ActivitiesScreen);

@@ -7,7 +7,7 @@ const GRAPHQL_BASE = "http://192.168.100.108:3000/graphql";
 
 const alwaysSendHeaders = { "Content-Type": "application/json" };
 
-const fetchGqlData = ({
+export const fetchGqlData = ({
   url = GRAPHQL_BASE,
   query = ``,
   variables = {},
