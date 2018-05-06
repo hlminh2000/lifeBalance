@@ -14,7 +14,7 @@ import getTheme from "./native-base-theme/components";
 import platform from "./native-base-theme/variables/platform";
 import reducers from "./src/reducers.js";
 import {
-  withQueryFactory,
+  withAllUserDataQuery,
   MainNavigation
 } from "./src/components/Navigations/Drawer/index.js";
 import STYLE from "./src/styleVariable";
@@ -22,6 +22,7 @@ import AuthScreen from "./src/components/AuthScreen";
 import CircularSlider from "./src/components/CalendarScreen/CircularSlider/index.js";
 import CircularTimeRangeSelector from "./src/components/CalendarScreen/CircularTimeRangeSelector/index.js";
 import TimeSetterModal from "./src/components/CalendarScreen/TimeSetterModal";
+import { UserProvider } from "./src/utils/auth";
 
 setCustomSourceTransformer(function(resolver) {
   if (
@@ -69,9 +70,13 @@ export default class App extends Component<{}> {
               />
               <AuthScreen
                 successRender={({ user, ...props }) => {
-                  const LinkedNavigation = withQueryFactory({ user })(
+                  const LinkedNavigation = withAllUserDataQuery({ user })(
                     ({ data, error, loading }) => (
-                      <MainNavigation {...{ ...props, data, error, loading }} />
+                      <UserProvider user={user}>
+                        <MainNavigation
+                          {...{ ...props, data, error, loading }}
+                        />
+                      </UserProvider>
                     )
                   );
                   return <LinkedNavigation />;

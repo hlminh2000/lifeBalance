@@ -37,7 +37,7 @@ const RootDrawer = DrawerNavigator(
   }
 );
 
-export const withQueryFactory = ({ user }) =>
+export const withAllUserDataQuery = ({ user }) =>
   withQuery({
     query: user
       .getIdToken()
@@ -66,9 +66,6 @@ export const MainNavigation = compose(
     restoreUserData,
     ...props
   }) => {
-    console.log("user: ", user);
-    console.log("error: ", error);
-    console.log("httpError: ", httpError);
     if (!loading && user) {
       restoreUserData({ user });
     }

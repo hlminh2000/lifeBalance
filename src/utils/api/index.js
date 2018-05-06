@@ -1,44 +1,34 @@
-import React from "react";
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import Component from "react-component-component";
 import { allUserDataQuery } from "./queries";
-const GRAPHQL_BASE = "http://192.168.100.108:3000/graphql";
+const GRAPHQL_BASE = "http://192.168.100.102:3000/graphql";
 // const GRAPHQL_BASE =
 //   "https://us-central1-lifebalance-e467a.cloudfunctions.net/api/graphql";
 
 const alwaysSendHeaders = { "Content-Type": "application/json" };
 
-export const fetchGqlData = ({
-  url = GRAPHQL_BASE,
-  query = ``,
-  variables = {},
-  headers = {}
-} = {}) =>
-  fetch(url, {
+export const fetchData = ({ url = GRAPHQL_BASE, body, headers = {} } = {}) => {
+  console.log("body: ", body);
+  return fetch(url, {
     method: "POST",
     headers: { ...alwaysSendHeaders, ...headers },
-    body: JSON.stringify({
-      query,
-      variables
-    })
+    body: JSON.stringify(body)
   })
     .then(res => res.json())
     .then(json => Promise.resolve(json.data));
-
+};
 export const withQuery = ({
   query = "",
-  variables,
   headers
 } = {}) => WrappedComponent => props => (
   <Component
     initialState={{ loading: true }}
     didMount={({ setState }) =>
-      Promise.all(
-        [query, variables, headers].map(thing => Promise.resolve(thing))
-      )
-        .then(([query, variables, headers]) =>
-          fetchGqlData({
-            query,
-            variables,
+      Promise.all([query, headers].map(thing => Promise.resolve(thing)))
+        .then(([query, headers]) =>
+          fetchData({
+            body: query,
             headers
           })
         )
@@ -53,6 +43,8 @@ export const withQuery = ({
 );
 
 export const fetchAllUserData = ({ idToken = "" } = {}) =>
-  fetchGqlData({
-    query: allUserDataQuery({ idToken })
+  fetchData({
+    body: {
+      query: allUserDataQuery({ idToken })
+    }
   });

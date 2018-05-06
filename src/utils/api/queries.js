@@ -1,4 +1,5 @@
-export const allUserDataQuery = ({ idToken }) => `
+export const allUserDataQuery = ({ idToken }) => ({
+  query: `
   {
     user(idToken:"${idToken}"){
       clientTimestamp
@@ -22,53 +23,75 @@ export const allUserDataQuery = ({ idToken }) => `
         date
       }
     }
-  }
-`;
+  }`
+});
 
 export const updateUserActivities = ({
   idToken,
   activitiesSet,
   clientTimestamp
-}) => `
-{
-  mutation{
-    updateUserActivities(
-      idToken: ${idToken},
-      activityData: ${activitiesSet},
-      clientTimestamp: ${clientTimestamp}
+}) => ({
+  query: `
+  {
+    mutation(
+      $idToken: ID!
+      $clientTimestamp: Float!
+      $activityData: [ActivityDataInput]!
     ){
-      id
-      icon
-      title
-      createdAt
-      isActive
-      isArchived
+      updateUserActivities(
+        idToken: $idToken,
+        activityData: $activityData,
+        clientTimestamp: $clientTimestamp
+      ){
+        id
+        icon
+        title
+        createdAt
+        isActive
+        isArchived
+      }
     }
+  }`,
+  variables: {
+    idToken,
+    activityData: activitiesSet,
+    clientTimestamp
   }
-}
-`;
+});
 
 export const updateUserActivityLogs = ({
   idToken,
   clientTimestamp,
   activityLogs,
   date
-}) => `
-{
-  mutation{
-    updateUserActivityLogs(
-      idToken: ${idToken},
-      clientTimestamp: ${clientTimestamp},
-      activityLogs: ${activityLogs},
-      date: ${date}
+}) => ({
+  query: `
+  {
+    mutation(
+      idToken: ID!
+      clientTimestamp: Float!
+      activityLogs: [ActivityLogInput]!
+      date: String!
     ){
-      id
-      activityId
-      timestamp
-      start
-      end
-      date
+      updateUserActivityLogs(
+        idToken: $idToken,
+        clientTimestamp: $clientTimestamp,
+        activityLogs: $activityLogs,
+        date: $date
+      ){
+        id
+        activityId
+        timestamp
+        start
+        end
+        date
+      }
     }
+  }`,
+  variables: {
+    idToken,
+    clientTimestamp,
+    activityLogs,
+    date
   }
-}
-`;
+});
