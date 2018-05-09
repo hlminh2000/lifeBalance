@@ -51,7 +51,7 @@ const WithContext = class extends Component {
           dispatch(actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_COMPLETE"].create()),
         onNewActivityCancel: () =>
           dispatch(actions["ACTIVITIES_SCREEN/NEW_ACTIVITY_CANCEL"].create()),
-        onActivityDelete: activityId =>
+        removeActivity: activityId =>
           dispatch(
             actions["ACTIVITIES_SCREEN/ACTIVITY_DELETE"].create(activityId)
           ),
@@ -73,9 +73,22 @@ const WithContext = class extends Component {
               idToken,
               clientTimestamp: Date.now(),
               activitiesSet: [
-                propsFromState.activities,
+                ...propsFromState.activities,
                 propsFromState.newStagingActivity
               ]
+            });
+            fetchData({ body });
+          });
+        },
+        onActivityDelete: activityId => {
+          propsFromDispatch.removeActivity(activityId);
+          user.getIdToken().then(idToken => {
+            const body = updateUserActivities({
+              idToken,
+              clientTimestamp: Date.now(),
+              activitiesSet: propsFromState.activities.filter(
+                ({ id }) => id !== activityId
+              )
             });
             fetchData({ body });
           });

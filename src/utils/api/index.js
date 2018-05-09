@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Component from "react-component-component";
 import { allUserDataQuery } from "./queries";
-const GRAPHQL_BASE = "http://192.168.100.102:3000/graphql";
+const GRAPHQL_BASE = "http://192.168.100.108:3000/graphql";
 // const GRAPHQL_BASE =
 //   "https://us-central1-lifebalance-e467a.cloudfunctions.net/api/graphql";
 
@@ -44,7 +44,5 @@ export const withQuery = ({
 
 export const fetchAllUserData = ({ idToken = "" } = {}) =>
   fetchData({
-    body: {
-      query: allUserDataQuery({ idToken })
-    }
+    body: allUserDataQuery({ idToken })
   });

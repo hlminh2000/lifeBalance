@@ -32,7 +32,6 @@ export const updateUserActivities = ({
   clientTimestamp
 }) => ({
   query: `
-  {
     mutation(
       $idToken: ID!
       $clientTimestamp: Float!
@@ -51,7 +50,7 @@ export const updateUserActivities = ({
         isArchived
       }
     }
-  }`,
+  `,
   variables: {
     idToken,
     activityData: activitiesSet,
@@ -66,7 +65,6 @@ export const updateUserActivityLogs = ({
   date
 }) => ({
   query: `
-  {
     mutation(
       idToken: ID!
       clientTimestamp: Float!
@@ -87,7 +85,7 @@ export const updateUserActivityLogs = ({
         date
       }
     }
-  }`,
+  `,
   variables: {
     idToken,
     clientTimestamp,
