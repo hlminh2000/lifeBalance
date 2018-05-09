@@ -27,6 +27,7 @@
     "react-native-calendars": "^1.16.1",
     "react-native-canvas": "^0.1.20",
     "react-native-checkbox": "^2.0.0",
+    "react-native-code-push": "^5.3.3",
     "react-native-fab": "^1.0.6",
     "react-native-fbsdk": "^0.7.0",
     "react-native-firebase": "^3.2.4",
