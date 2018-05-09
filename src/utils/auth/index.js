@@ -5,25 +5,6 @@ import googleLogin from "./google";
 import firebase from "react-native-firebase";
 import PropTypes from "prop-types";
 
-export const UserContext = React.createContext(null);
-
-export const withIdToken = WrappedComponent => props => (
-  <UserContext.Consumer>
-    {user => (
-      <Component
-        initialState={{ idToken: null }}
-        didMount={({ setState }) => {
-          user.getIdToken().then(idToken => setState({ idToken }));
-        }}
-      >
-        {({ state: { idToken } }) => (
-          <WrappedComponent {...{ ...props, idToken }} />
-        )}
-      </Component>
-    )}
-  </UserContext.Consumer>
-);
-
 export default {
   facebookLogin,
   googleLogin,
