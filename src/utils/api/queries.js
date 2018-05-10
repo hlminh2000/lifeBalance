@@ -66,10 +66,10 @@ export const updateUserActivityLogs = ({
 }) => ({
   query: `
     mutation(
-      idToken: ID!
-      clientTimestamp: Float!
-      activityLogs: [ActivityLogInput]!
-      date: String!
+      $idToken: ID!
+      $clientTimestamp: Float!
+      $activityLogs: [ActivityLogInput]!
+      $date: String!
     ){
       updateUserActivityLogs(
         idToken: $idToken,
