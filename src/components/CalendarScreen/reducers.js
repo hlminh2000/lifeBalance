@@ -16,7 +16,8 @@ const newActivityLog = activityId => ({
   activityId: activityId,
   timestamp: Date.now(),
   start: new moment().subtract(1, "h").unix(),
-  end: new moment().unix()
+  end: new moment().unix(),
+  date: DateUtils.toCalendarString(DateUtils.getDateString())
 });
 
 export default (state = initialState, { type, payload }) => {

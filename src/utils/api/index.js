@@ -9,7 +9,6 @@ const GRAPHQL_BASE = "http://192.168.100.108:3000/graphql";
 const alwaysSendHeaders = { "Content-Type": "application/json" };
 
 export const fetchData = ({ url = GRAPHQL_BASE, body, headers = {} } = {}) => {
-  console.log("body: ", body);
   return fetch(url, {
     method: "POST",
     headers: { ...alwaysSendHeaders, ...headers },
