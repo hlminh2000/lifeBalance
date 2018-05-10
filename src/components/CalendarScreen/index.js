@@ -67,7 +67,7 @@ const WithContext = class extends Component {
               to: toUnix(max)
             })
           ),
-        onActivityUncheck: (activityId, selectedDateString) =>
+        deregisterActivityLog: (activityId, selectedDateString) =>
           dispatch(
             actions["CALENDAR_SCREEN/REMOVE_ACTIVITY_LOG"].create(
               activityId,
@@ -108,7 +108,24 @@ const WithContext = class extends Component {
               ],
               date: selectedDateString
             });
-            console.log("body: ", body);
+            fetchData({ body });
+          });
+        },
+        onActivityUncheck: (_activityId, selectedDateString) => {
+          propsFromDispatch.deregisterActivityLog(
+            _activityId,
+            selectedDateString
+          );
+          const { activitiesLog } = propsFromState;
+          user.getIdToken().then(idToken => {
+            const body = updateUserActivityLogs({
+              idToken,
+              clientTimestamp: Date.now(),
+              activityLogs: (activitiesLog[selectedDateString] || []).filter(
+                ({ activityId }) => activityId !== _activityId
+              ),
+              date: selectedDateString
+            });
             fetchData({ body });
           });
         }
